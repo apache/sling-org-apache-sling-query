@@ -52,7 +52,7 @@ public class WarningIterator<T> extends AbstractIterator<T> {
 		}
 		if (count++ == limit) {
 			LOG.warn(
-					"Number of processed resources exceeded {}. Consider using a JCR query instead of SlingQuery. More info here: http://git.io/h2HeUQ",
+					"Number of processed resources exceeded {}. Consider using a JCR query instead of SlingQuery. More info here: https://s.apache.org/oana",
 					new Object[] { limit });
 		}
 		return iterator.next();
