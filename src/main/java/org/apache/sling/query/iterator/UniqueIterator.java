@@ -19,22 +19,21 @@
 
 package org.apache.sling.query.iterator;
 
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import org.apache.sling.query.api.internal.Option;
-import org.apache.sling.query.api.internal.TreeProvider;
 
 public class UniqueIterator<T> extends AbstractIterator<Option<T>> {
 
 	private final Iterator<Option<T>> iterator;
+	
+	private Set<T> seen;
 
-	private final TreeProvider<T> treeProvider;
-
-	private T lastElement;
-
-	public UniqueIterator(Iterator<Option<T>> input, TreeProvider<T> treeProvider) {
+	public UniqueIterator(Iterator<Option<T>> input) {
 		this.iterator = input;
-		this.treeProvider = treeProvider;
+		seen = new HashSet<>();
 	}
 
 	@Override
@@ -43,14 +42,12 @@ public class UniqueIterator<T> extends AbstractIterator<Option<T>> {
 			return null;
 		}
 		Option<T> candidate = iterator.next();
-		Option<T> result;
-		if (treeProvider.sameElement(lastElement, candidate.getElement())) {
-			result = Option.empty(candidate.getArgumentId());
-		} else {
-			result = candidate;
+		if (!candidate.isEmpty()) {
+			if (!seen.add(candidate.getElement())) {
+				return Option.empty(candidate.getArgumentId());
+			}
 		}
-		lastElement = candidate.getElement();
-		return result;
+		return candidate;
 	}
 
 }

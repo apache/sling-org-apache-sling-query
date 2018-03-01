@@ -757,7 +757,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 	 * @return new SlingQuery object transformed by this operation
 	 */
 	public Q unique() {
-		return function(new UniqueFunction<>(provider));
+		return function(new UniqueFunction<>());
 	}
 
 	private Q function(Function<?, ?> function, Iterable<T> iterable) {

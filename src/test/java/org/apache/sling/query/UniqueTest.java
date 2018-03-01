@@ -36,6 +36,6 @@ public class UniqueTest {
 		Resource r3 = tree.getChild("home/java");
 
 		SlingQuery query = $(r1, r1, r1, r2, r2, r3, r3, r3, r1).unique();
-		assertResourceListEquals(query.iterator(), "home", "application", "java", "home");
+		assertResourceListEquals(query.iterator(), "home", "application", "java");
 	}
 }

@@ -23,20 +23,13 @@ import java.util.Iterator;
 
 import org.apache.sling.query.api.internal.IteratorToIteratorFunction;
 import org.apache.sling.query.api.internal.Option;
-import org.apache.sling.query.api.internal.TreeProvider;
 import org.apache.sling.query.iterator.UniqueIterator;
 
 public class UniqueFunction<T> implements IteratorToIteratorFunction<T> {
 
-	private final TreeProvider<T> treeProvider;
-
-	public UniqueFunction(TreeProvider<T> treeProvider) {
-		this.treeProvider = treeProvider;
-	}
-
 	@Override
 	public Iterator<Option<T>> apply(Iterator<Option<T>> input) {
-		return new UniqueIterator<>(input, treeProvider);
+		return new UniqueIterator<>(input);
 	}
 
 }
