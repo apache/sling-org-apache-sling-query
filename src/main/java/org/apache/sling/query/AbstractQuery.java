@@ -752,8 +752,10 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 	}
 
 	/**
-	 * Filter out repeated adjacent resources.
-	 * 
+	 * Filter out repeated resources. The implementation of this method uses
+	 * a {@link HashSet} to store the processed elements, which may result
+	 * in an increased memory usage for the big collections.
+	 *
 	 * @return new SlingQuery object transformed by this operation
 	 */
 	public Q unique() {
