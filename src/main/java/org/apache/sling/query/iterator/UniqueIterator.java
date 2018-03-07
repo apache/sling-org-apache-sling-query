@@ -19,16 +19,24 @@
 
 package org.apache.sling.query.iterator;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 import org.apache.sling.query.api.internal.Option;
 
+/**
+ * Provides an iteration of unique objects. During the iteration process this
+ * iterator maintains a set of previously seen items that will be used as filter
+ * to prevent duplicates from being iterated through
+ * 
+ * @param <T> 
+ */
 public class UniqueIterator<T> extends AbstractIterator<Option<T>> {
 
-	private final Iterator<Option<T>> iterator;
-	
+	private Iterator<Option<T>> iterator;
+
 	private Set<T> seen;
 
 	public UniqueIterator(Iterator<Option<T>> input) {
@@ -39,6 +47,8 @@ public class UniqueIterator<T> extends AbstractIterator<Option<T>> {
 	@Override
 	protected Option<T> getElement() {
 		if (!iterator.hasNext()) {
+			iterator = Collections.emptyIterator();
+			seen = null;
 			return null;
 		}
 		Option<T> candidate = iterator.next();

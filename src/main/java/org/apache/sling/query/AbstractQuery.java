@@ -752,7 +752,8 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 	}
 
 	/**
-	 * Filter out repeated adjacent resources.
+	 * Filter out duplicated resources in a stream, this iterator is stateful during 
+	 * the iteration process.
 	 * 
 	 * @return new SlingQuery object transformed by this operation
 	 */
