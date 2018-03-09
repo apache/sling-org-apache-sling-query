@@ -26,9 +26,10 @@ import org.apache.sling.query.api.internal.IteratorToIteratorFunction;
 import org.apache.sling.query.api.internal.Option;
 
 /**
- * This iterator returns all elements of the input list which are mapped to non-empty values by the input
- * function. Name is inspired by the <a href="http://en.wikipedia.org/wiki/Support_(mathematics)">support of
- * the function</a>.
+ * This iterator returns all elements of the input list which are mapped to
+ * non-empty values by the input function. Name is inspired by the
+ * <a href="http://en.wikipedia.org/wiki/Support_(mathematics)">support of the
+ * function</a>.
  */
 public class SuppIterator<T> extends AbstractIterator<Option<T>> {
 
@@ -46,29 +47,43 @@ public class SuppIterator<T> extends AbstractIterator<Option<T>> {
 	}
 
 	/**
-	 * The idea behind this method is that index of each element in the input iterator is passed to the
-	 * function. Elements returned by the output iterator contains the same index, which can be used to assign
-	 * input to output elements. We check which indices are present in the output iterator and return only
-	 * related input elements.
+	 * The idea behind this method is that index of each element in the input
+	 * iterator is passed to the function. One or more Option<T> items for each
+	 * index will be returned. If any Option<T> item in that index set is not
+	 * empty then the corresponding element in the input will be returned.
 	 */
 	@Override
 	protected Option<T> getElement() {
-		if (outputElement != null) {
-			final int outputIndex = outputElement.getArgumentId();
-			if (currentIndex < outputIndex) {
-				return Option.empty(input.get(currentIndex++).getArgumentId());
-			} else if (currentIndex == outputIndex && !outputElement.isEmpty()) {
-				return input.get(currentIndex++);
+		if (outputElement == null) {
+			if (!output.hasNext()) {
+				return null;
 			}
+			outputElement = output.next();
 		}
 
-		while (output.hasNext()) {
-			outputElement = output.next();
-			final int outputIndex = outputElement.getArgumentId();
-			if ((outputIndex == currentIndex && !outputElement.isEmpty()) || outputIndex > currentIndex) {
-				return getElement();
+		int outputIndex = outputElement.getArgumentId();
+		boolean emptyResponse = outputElement.isEmpty();
+
+		//loop to next index or end of list
+		while (outputIndex <= currentIndex && output.hasNext()) {
+			if (emptyResponse) {
+				emptyResponse = outputElement.isEmpty();
 			}
+			outputElement = output.next();
+			outputIndex = outputElement.getArgumentId();
 		}
-		return null;
+
+		if (emptyResponse) {
+			if (outputIndex > currentIndex) {
+				return Option.empty(currentIndex++);
+			}
+			return null;
+		}
+
+		if (outputIndex <= currentIndex) {
+			outputElement = null;
+		}
+		return input.get(currentIndex++);
 	}
+
 }
