@@ -34,15 +34,11 @@ public class AlternativeIterator<T> extends AbstractIterator<Option<T>> {
 
 	@Override
 	protected Option<T> getElement() {
-		Option<T> element = null;
 		for (Iterator<Option<T>> i : iterators) {
 			if (i.hasNext()) {
-				Option<T> option = i.next();
-				if (element == null || !option.isEmpty()) {
-					element = option;
-				}
+				return i.next();
 			}
 		}
-		return element;
+		return null;
 	}
 }
