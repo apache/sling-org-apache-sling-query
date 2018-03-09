@@ -20,60 +20,42 @@
 package org.apache.sling.query.iterator;
 
 import java.util.Iterator;
-import java.util.ListIterator;
 
 import org.apache.sling.query.api.internal.Option;
-import org.apache.sling.query.util.LazyList;
 
+/**
+ * 
+ * 
+ *
+ * @param <T>
+ */
 public class LastIterator<T> extends AbstractIterator<Option<T>> {
 
-	private final LazyList<Option<T>> lazyList;
+	private final Iterator<Option<T>> iterator;
 
-	private final ListIterator<Option<T>> iterator;
-
-	private boolean finished;
-
-	private boolean initialized;
-
-	private int lastIndex = -1;
+	private Option<T> previous;
 
 	public LastIterator(Iterator<Option<T>> iterator) {
-		this.lazyList = new LazyList<Option<T>>(iterator);
-		this.iterator = lazyList.listIterator();
+		this.iterator = iterator;
 	}
 
 	@Override
 	protected Option<T> getElement() {
-		if (finished) {
-			return null;
-		}
-
-		initializeLastIndex();
-
-		Option<T> candidate;
-		if (iterator.hasNext()) {
-			candidate = iterator.next();
-		} else {
-			finished = true;
-			return null;
-		}
-		if (iterator.previousIndex() == lastIndex) {
-			finished = true;
+		Option<T> candidate = previous;
+		
+		if (!iterator.hasNext()) {
+			previous = null;
 			return candidate;
-		} else {
-			return Option.empty(candidate.getArgumentId());
-		}
-	}
-
-	private void initializeLastIndex() {
-		ListIterator<Option<T>> i = lazyList.listIterator();
-		if (!initialized) {
-			while (i.hasNext()) {
-				if (!i.next().isEmpty()) {
-					lastIndex = i.previousIndex();
-				}
+		} 
+		
+		if (candidate == null) {
+			candidate = iterator.next();
+			if (!iterator.hasNext()) {
+				return candidate;
 			}
 		}
-		initialized = true;
+		previous = iterator.next();
+		return Option.empty(candidate.getArgumentId());
 	}
+
 }
