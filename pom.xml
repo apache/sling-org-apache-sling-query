@@ -28,7 +28,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>org.apache.sling.query</artifactId>
-    <version>4.0.2</version>
+    <version>4.0.3-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
     <name>Apache Sling Query</name>
@@ -38,7 +38,7 @@
         <connection>scm:git:https://gitbox.apache.org/repos/asf/sling-org-apache-sling-query.git</connection>
         <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/sling-org-apache-sling-query.git</developerConnection>
         <url>https://gitbox.apache.org/repos/asf?p=sling-org-apache-sling-query.git</url>
-      <tag>org.apache.sling.query-4.0.2</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <properties>
