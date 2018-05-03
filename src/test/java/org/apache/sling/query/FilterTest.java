@@ -27,8 +27,6 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.query.api.SearchStrategy;
 import org.junit.Test;
 
-import java.util.function.Predicate;
-
 public class FilterTest {
 
 	private Resource tree = TestUtils.getTree();

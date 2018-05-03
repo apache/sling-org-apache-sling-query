@@ -31,12 +31,10 @@ public final class IteratorUtils {
 		return Arrays.asList(elements).iterator();
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <T> Iterator<T> singleElementIterator(T element) {
 		return Arrays.asList(element).iterator();
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <T> Iterator<T> emptyIterator() {
 		return Arrays.<T> asList().iterator();
 	}
