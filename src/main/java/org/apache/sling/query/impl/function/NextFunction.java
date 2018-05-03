@@ -17,29 +17,33 @@
  * under the License.
  */
 
-package org.apache.sling.query.api.internal;
+package org.apache.sling.query.impl.function;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.function.Predicate;
 
-import org.apache.sling.query.impl.selector.parser.Attribute;
-import org.apache.sling.query.impl.selector.parser.SelectorSegment;
-import org.osgi.annotation.versioning.ConsumerType;
+import org.apache.sling.query.api.internal.ElementToIteratorFunction;
+import org.apache.sling.query.api.internal.TreeProvider;
+import org.apache.sling.query.impl.iterator.SiblingsIterator;
+import org.apache.sling.query.impl.iterator.SiblingsIterator.Type;
 
-@ConsumerType
-public interface TreeProvider<T> {
-	Iterator<T> listChildren(T parent);
+public class NextFunction<T> implements ElementToIteratorFunction<T> {
 
-	T getParent(T element);
+	private final Predicate<T> until;
 
-	String getName(T element);
+	private final TreeProvider<T> provider;
 
-	Predicate<T> getPredicate(String type, String name, List<Attribute> attributes);
+	public NextFunction(TreeProvider<T> provider) {
+		this(null, provider);
+	}
 
-	Iterator<T> query(List<SelectorSegment> segment, T resource);
+	public NextFunction(Predicate<T> until, TreeProvider<T> provider) {
+		this.until = until;
+		this.provider = provider;
+	}
 
-	boolean sameElement(T o1, T o2);
-
-	boolean isDescendant(T root, T testedElement);
+	@Override
+	public Iterator<T> apply(T resource) {
+		return new SiblingsIterator<>(until, resource, Type.NEXT, provider);
+	}
 }

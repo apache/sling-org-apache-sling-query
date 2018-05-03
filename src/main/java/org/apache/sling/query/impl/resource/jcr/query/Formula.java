@@ -17,29 +17,45 @@
  * under the License.
  */
 
-package org.apache.sling.query.api.internal;
+package org.apache.sling.query.impl.resource.jcr.query;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Predicate;
 
-import org.apache.sling.query.impl.selector.parser.Attribute;
-import org.apache.sling.query.impl.selector.parser.SelectorSegment;
-import org.osgi.annotation.versioning.ConsumerType;
+public class Formula implements Term {
+	public enum Operator {
+		AND, OR
+	}
 
-@ConsumerType
-public interface TreeProvider<T> {
-	Iterator<T> listChildren(T parent);
+	private final Operator operator;
 
-	T getParent(T element);
+	private final List<Term> conditions;
 
-	String getName(T element);
+	public Formula(Operator operator, List<Term> conditions) {
+		this.operator = operator;
+		this.conditions = conditions;
+	}
 
-	Predicate<T> getPredicate(String type, String name, List<Attribute> attributes);
+	public String buildString() {
+		if (conditions.isEmpty()) {
+			return "";
+		}
 
-	Iterator<T> query(List<SelectorSegment> segment, T resource);
-
-	boolean sameElement(T o1, T o2);
-
-	boolean isDescendant(T root, T testedElement);
+		StringBuilder builder = new StringBuilder();
+		Iterator<Term> iterator = conditions.iterator();
+		if (conditions.size() > 1) {
+			builder.append("(");
+		}
+		while (iterator.hasNext()) {
+			Term term = iterator.next();
+			builder.append(term.buildString());
+			if (iterator.hasNext()) {
+				builder.append(' ').append(operator.toString()).append(' ');
+			}
+		}
+		if (conditions.size() > 1) {
+			builder.append(")");
+		}
+		return builder.toString();
+	}
 }

@@ -17,29 +17,35 @@
  * under the License.
  */
 
-package org.apache.sling.query.api.internal;
+package org.apache.sling.query.impl.function;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.function.Predicate;
 
-import org.apache.sling.query.impl.selector.parser.Attribute;
-import org.apache.sling.query.impl.selector.parser.SelectorSegment;
-import org.osgi.annotation.versioning.ConsumerType;
+import org.apache.sling.query.api.internal.ElementToIteratorFunction;
+import org.apache.sling.query.api.internal.TreeProvider;
+import org.apache.sling.query.impl.util.IteratorUtils;
 
-@ConsumerType
-public interface TreeProvider<T> {
-	Iterator<T> listChildren(T parent);
+public class ClosestFunction<T> implements ElementToIteratorFunction<T> {
 
-	T getParent(T element);
+	private final Predicate<T> predicate;
 
-	String getName(T element);
+	private final TreeProvider<T> provider;
 
-	Predicate<T> getPredicate(String type, String name, List<Attribute> attributes);
+	public ClosestFunction(Predicate<T> predicate, TreeProvider<T> provider) {
+		this.predicate = predicate;
+		this.provider = provider;
+	}
 
-	Iterator<T> query(List<SelectorSegment> segment, T resource);
-
-	boolean sameElement(T o1, T o2);
-
-	boolean isDescendant(T root, T testedElement);
+	@Override
+	public Iterator<T> apply(T resource) {
+		T current = resource;
+		while (current != null) {
+			if (predicate.test(current)) {
+				return IteratorUtils.singleElementIterator(current);
+			}
+			current = provider.getParent(current);
+		}
+		return IteratorUtils.emptyIterator();
+	}
 }

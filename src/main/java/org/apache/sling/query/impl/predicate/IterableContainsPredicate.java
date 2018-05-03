@@ -17,33 +17,31 @@
  * under the License.
  */
 
-package org.apache.sling.query.mock;
+package org.apache.sling.query.impl.predicate;
 
-import java.util.Arrays;
-import java.util.List;
+import org.apache.sling.query.api.internal.TreeProvider;
+import org.apache.sling.query.impl.util.LazyList;
 
-import org.apache.sling.query.impl.resource.jcr.JcrTypeResolver;
+import java.util.function.Predicate;
 
-public class MockTypeResolver implements JcrTypeResolver {
+public class IterableContainsPredicate<T> implements Predicate<T> {
 
-	private static final List<String> TYPE_HIERARCHY = Arrays.asList("nt:base", "nt:unstructured", "cq:Page",
-			"cq:Type");
+	private final Iterable<T> iterable;
 
-	private static final List<String> OTHER_TYPES = Arrays.asList("jcr:otherType", "jcr:someType");
+	private final TreeProvider<T> provider;
 
-	@Override
-	public boolean isJcrType(String name) {
-		return TYPE_HIERARCHY.contains(name) || OTHER_TYPES.contains(name);
+	public IterableContainsPredicate(Iterable<T> iterable, TreeProvider<T> provider) {
+		this.iterable = new LazyList<T>(iterable.iterator());
+		this.provider = provider;
 	}
 
 	@Override
-	public boolean isSubtype(String supertype, String subtype) {
-		int i1 = TYPE_HIERARCHY.indexOf(supertype);
-		int i2 = TYPE_HIERARCHY.indexOf(subtype);
-		if (i1 == -1 || i2 == -1) {
-			return false;
+	public boolean test(T element) {
+		for (T t : iterable) {
+			if (provider.sameElement(t, element)) {
+				return true;
+			}
 		}
-		return i1 < i2;
+		return false;
 	}
-
 }
