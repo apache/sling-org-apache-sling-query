@@ -17,33 +17,42 @@
  * under the License.
  */
 
-package org.apache.sling.query.mock;
+package org.apache.sling.query.impl.iterator;
 
-import java.util.Arrays;
-import java.util.List;
+import org.apache.sling.query.api.internal.TreeProvider;
 
-import org.apache.sling.query.impl.resource.jcr.JcrTypeResolver;
+import java.util.function.Predicate;
 
-public class MockTypeResolver implements JcrTypeResolver {
+public class ParentsIterator<T> extends AbstractIterator<T> {
 
-	private static final List<String> TYPE_HIERARCHY = Arrays.asList("nt:base", "nt:unstructured", "cq:Page",
-			"cq:Type");
+	private final Predicate<T> until;
 
-	private static final List<String> OTHER_TYPES = Arrays.asList("jcr:otherType", "jcr:someType");
+	private final TreeProvider<T> provider;
+	
+	private T currentResource;
 
-	@Override
-	public boolean isJcrType(String name) {
-		return TYPE_HIERARCHY.contains(name) || OTHER_TYPES.contains(name);
+	public ParentsIterator(Predicate<T> until, T currentResource, TreeProvider<T> provider) {
+		this.currentResource = currentResource;
+		this.until = until;
+		this.provider = provider;
 	}
 
 	@Override
-	public boolean isSubtype(String supertype, String subtype) {
-		int i1 = TYPE_HIERARCHY.indexOf(supertype);
-		int i2 = TYPE_HIERARCHY.indexOf(subtype);
-		if (i1 == -1 || i2 == -1) {
-			return false;
+	protected T getElement() {
+		if (currentResource == null) {
+			return null;
 		}
-		return i1 < i2;
+		currentResource = provider.getParent(currentResource);
+
+		if (currentResource == null) {
+			return null;
+		}
+
+		if (until != null && until.test(currentResource)) {
+			return null;
+		}
+
+		return currentResource;
 	}
 
 }

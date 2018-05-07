@@ -17,33 +17,39 @@
  * under the License.
  */
 
-package org.apache.sling.query.mock;
+package org.apache.sling.query.impl.selector.parser;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.sling.query.impl.resource.jcr.JcrTypeResolver;
+import org.apache.commons.lang.StringUtils;
 
-public class MockTypeResolver implements JcrTypeResolver {
+public final class SelectorParser {
 
-	private static final List<String> TYPE_HIERARCHY = Arrays.asList("nt:base", "nt:unstructured", "cq:Page",
-			"cq:Type");
-
-	private static final List<String> OTHER_TYPES = Arrays.asList("jcr:otherType", "jcr:someType");
-
-	@Override
-	public boolean isJcrType(String name) {
-		return TYPE_HIERARCHY.contains(name) || OTHER_TYPES.contains(name);
+	private SelectorParser() {
 	}
 
-	@Override
-	public boolean isSubtype(String supertype, String subtype) {
-		int i1 = TYPE_HIERARCHY.indexOf(supertype);
-		int i2 = TYPE_HIERARCHY.indexOf(subtype);
-		if (i1 == -1 || i2 == -1) {
-			return false;
+	public static List<Selector> parse(String selector) {
+		if (StringUtils.isEmpty(selector)) {
+			return Arrays.asList(new Selector());
 		}
-		return i1 < i2;
+		ParserContext context = new ParserContext();
+		for (char c : selector.toCharArray()) {
+			context.getState().process(context, c);
+		}
+		context.getState().process(context, (char) 0);
+		return context.getSelectors();
+	}
+
+	public static List<SelectorSegment> getFirstSegmentFromEachSelector(List<Selector> selectors) {
+		List<SelectorSegment> segments = new ArrayList<SelectorSegment>();
+		for (Selector selector : selectors) {
+			if (!selector.getSegments().isEmpty()) {
+				segments.add(selector.getSegments().get(0));
+			}
+		}
+		return segments;
 	}
 
 }

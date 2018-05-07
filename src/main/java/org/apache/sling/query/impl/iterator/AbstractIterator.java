@@ -17,33 +17,37 @@
  * under the License.
  */
 
-package org.apache.sling.query.mock;
+package org.apache.sling.query.impl.iterator;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-import org.apache.sling.query.impl.resource.jcr.JcrTypeResolver;
+public abstract class AbstractIterator<T> implements Iterator<T> {
 
-public class MockTypeResolver implements JcrTypeResolver {
-
-	private static final List<String> TYPE_HIERARCHY = Arrays.asList("nt:base", "nt:unstructured", "cq:Page",
-			"cq:Type");
-
-	private static final List<String> OTHER_TYPES = Arrays.asList("jcr:otherType", "jcr:someType");
+	private T currentElement;
 
 	@Override
-	public boolean isJcrType(String name) {
-		return TYPE_HIERARCHY.contains(name) || OTHER_TYPES.contains(name);
-	}
-
-	@Override
-	public boolean isSubtype(String supertype, String subtype) {
-		int i1 = TYPE_HIERARCHY.indexOf(supertype);
-		int i2 = TYPE_HIERARCHY.indexOf(subtype);
-		if (i1 == -1 || i2 == -1) {
-			return false;
+	public boolean hasNext() {
+		if (currentElement == null) {
+			currentElement = getElement();
 		}
-		return i1 < i2;
+		return currentElement != null;
 	}
 
+	@Override
+	public T next() {
+		if (!hasNext()) {
+			throw new NoSuchElementException();
+		}
+		T result = currentElement;
+		currentElement = null;
+		return result;
+	}
+
+	@Override
+	public void remove() {
+		throw new UnsupportedOperationException();
+	}
+
+	protected abstract T getElement();
 }

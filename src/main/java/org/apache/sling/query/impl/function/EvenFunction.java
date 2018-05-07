@@ -17,29 +17,40 @@
  * under the License.
  */
 
-package org.apache.sling.query.api.internal;
+package org.apache.sling.query.impl.function;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.function.Predicate;
 
-import org.apache.sling.query.impl.selector.parser.Attribute;
-import org.apache.sling.query.impl.selector.parser.SelectorSegment;
-import org.osgi.annotation.versioning.ConsumerType;
+import org.apache.sling.query.api.internal.IteratorToIteratorFunction;
+import org.apache.sling.query.api.internal.Option;
+import org.apache.sling.query.impl.iterator.FilteringIterator;
 
-@ConsumerType
-public interface TreeProvider<T> {
-	Iterator<T> listChildren(T parent);
+public class EvenFunction<T> implements IteratorToIteratorFunction<T> {
 
-	T getParent(T element);
+	private final boolean even;
 
-	String getName(T element);
+	public EvenFunction(boolean even) {
+		this.even = even;
+	}
 
-	Predicate<T> getPredicate(String type, String name, List<Attribute> attributes);
+	@Override
+	public Iterator<Option<T>> apply(Iterator<Option<T>> resources) {
+		return new FilteringIterator<>(resources, new EvenPredicate<>(even));
+	}
 
-	Iterator<T> query(List<SelectorSegment> segment, T resource);
+	private static class EvenPredicate<T> implements Predicate<T> {
+		private boolean accept;
 
-	boolean sameElement(T o1, T o2);
+		public EvenPredicate(boolean firstState) {
+			accept = firstState;
+		}
 
-	boolean isDescendant(T root, T testedElement);
+		@Override
+		public boolean test(T element) {
+			boolean oldAccept = accept;
+			accept = !accept;
+			return oldAccept;
+		}
+	}
 }

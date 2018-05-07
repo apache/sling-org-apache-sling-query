@@ -17,33 +17,29 @@
  * under the License.
  */
 
-package org.apache.sling.query.mock;
+package org.apache.sling.query.impl.function;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Iterator;
 
-import org.apache.sling.query.impl.resource.jcr.JcrTypeResolver;
+import org.apache.sling.query.api.internal.ElementToIteratorFunction;
+import org.apache.sling.query.api.internal.TreeProvider;
+import org.apache.sling.query.impl.util.IteratorUtils;
 
-public class MockTypeResolver implements JcrTypeResolver {
+public class SiblingsFunction<T> implements ElementToIteratorFunction<T> {
 
-	private static final List<String> TYPE_HIERARCHY = Arrays.asList("nt:base", "nt:unstructured", "cq:Page",
-			"cq:Type");
+	private final TreeProvider<T> provider;
 
-	private static final List<String> OTHER_TYPES = Arrays.asList("jcr:otherType", "jcr:someType");
-
-	@Override
-	public boolean isJcrType(String name) {
-		return TYPE_HIERARCHY.contains(name) || OTHER_TYPES.contains(name);
+	public SiblingsFunction(TreeProvider<T> provider) {
+		this.provider = provider;
 	}
 
 	@Override
-	public boolean isSubtype(String supertype, String subtype) {
-		int i1 = TYPE_HIERARCHY.indexOf(supertype);
-		int i2 = TYPE_HIERARCHY.indexOf(subtype);
-		if (i1 == -1 || i2 == -1) {
-			return false;
+	public Iterator<T> apply(T resource) {
+		T parent = provider.getParent(resource);
+		if (parent == null) {
+			return IteratorUtils.singleElementIterator(resource);
+		} else {
+			return provider.listChildren(parent);
 		}
-		return i1 < i2;
 	}
-
 }

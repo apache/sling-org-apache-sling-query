@@ -17,33 +17,24 @@
  * under the License.
  */
 
-package org.apache.sling.query.mock;
+package org.apache.sling.query.impl.predicate;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.function.Predicate;
 
-import org.apache.sling.query.impl.resource.jcr.JcrTypeResolver;
+public class RejectingPredicate<T> implements Predicate<T> {
 
-public class MockTypeResolver implements JcrTypeResolver {
+	private final Predicate<T> predicate;
 
-	private static final List<String> TYPE_HIERARCHY = Arrays.asList("nt:base", "nt:unstructured", "cq:Page",
-			"cq:Type");
+	public RejectingPredicate() {
+		this(resource -> true);
+	}
 
-	private static final List<String> OTHER_TYPES = Arrays.asList("jcr:otherType", "jcr:someType");
-
-	@Override
-	public boolean isJcrType(String name) {
-		return TYPE_HIERARCHY.contains(name) || OTHER_TYPES.contains(name);
+	public RejectingPredicate(Predicate<T> predicate) {
+		this.predicate = predicate;
 	}
 
 	@Override
-	public boolean isSubtype(String supertype, String subtype) {
-		int i1 = TYPE_HIERARCHY.indexOf(supertype);
-		int i2 = TYPE_HIERARCHY.indexOf(subtype);
-		if (i1 == -1 || i2 == -1) {
-			return false;
-		}
-		return i1 < i2;
+	public boolean test(T value) {
+		return !predicate.test(value);
 	}
-
 }

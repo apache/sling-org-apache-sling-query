@@ -21,12 +21,11 @@ package org.apache.sling.query;
 
 import java.util.Iterator;
 
-import org.apache.sling.api.adapter.Adaptable;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.query.api.SearchStrategy;
-import org.apache.sling.query.iterator.AdaptToIterator;
-import org.apache.sling.query.resource.ResourceTreeProvider;
+import org.apache.sling.query.impl.iterator.AdaptToIterator;
+import org.apache.sling.query.impl.resource.ResourceTreeProvider;
 import org.osgi.annotation.versioning.ProviderType;
 
 /**

@@ -17,33 +17,28 @@
  * under the License.
  */
 
-package org.apache.sling.query.mock;
+package org.apache.sling.query.impl.iterator;
 
-import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
-import org.apache.sling.query.impl.resource.jcr.JcrTypeResolver;
+import org.apache.sling.query.api.internal.Option;
 
-public class MockTypeResolver implements JcrTypeResolver {
+public class AlternativeIterator<T> extends AbstractIterator<Option<T>> {
 
-	private static final List<String> TYPE_HIERARCHY = Arrays.asList("nt:base", "nt:unstructured", "cq:Page",
-			"cq:Type");
+	private final List<Iterator<Option<T>>> iterators;
 
-	private static final List<String> OTHER_TYPES = Arrays.asList("jcr:otherType", "jcr:someType");
-
-	@Override
-	public boolean isJcrType(String name) {
-		return TYPE_HIERARCHY.contains(name) || OTHER_TYPES.contains(name);
+	public AlternativeIterator(List<Iterator<Option<T>>> iterators) {
+		this.iterators = iterators;
 	}
 
 	@Override
-	public boolean isSubtype(String supertype, String subtype) {
-		int i1 = TYPE_HIERARCHY.indexOf(supertype);
-		int i2 = TYPE_HIERARCHY.indexOf(subtype);
-		if (i1 == -1 || i2 == -1) {
-			return false;
+	protected Option<T> getElement() {
+		for (Iterator<Option<T>> i : iterators) {
+			if (i.hasNext()) {
+				return i.next();
+			}
 		}
-		return i1 < i2;
+		return null;
 	}
-
 }

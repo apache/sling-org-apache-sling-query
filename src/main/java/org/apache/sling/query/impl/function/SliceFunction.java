@@ -17,33 +17,36 @@
  * under the License.
  */
 
-package org.apache.sling.query.mock;
+package org.apache.sling.query.impl.function;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Iterator;
 
-import org.apache.sling.query.impl.resource.jcr.JcrTypeResolver;
+import org.apache.sling.query.api.internal.IteratorToIteratorFunction;
+import org.apache.sling.query.api.internal.Option;
+import org.apache.sling.query.impl.iterator.SliceIterator;
 
-public class MockTypeResolver implements JcrTypeResolver {
+public class SliceFunction<T> implements IteratorToIteratorFunction<T> {
 
-	private static final List<String> TYPE_HIERARCHY = Arrays.asList("nt:base", "nt:unstructured", "cq:Page",
-			"cq:Type");
+	private final int from;
 
-	private static final List<String> OTHER_TYPES = Arrays.asList("jcr:otherType", "jcr:someType");
+	private final Integer to;
 
-	@Override
-	public boolean isJcrType(String name) {
-		return TYPE_HIERARCHY.contains(name) || OTHER_TYPES.contains(name);
+	public SliceFunction(int from, int to) {
+		this.from = from;
+		this.to = to;
+	}
+
+	public SliceFunction(int from) {
+		this.from = from;
+		this.to = null;
 	}
 
 	@Override
-	public boolean isSubtype(String supertype, String subtype) {
-		int i1 = TYPE_HIERARCHY.indexOf(supertype);
-		int i2 = TYPE_HIERARCHY.indexOf(subtype);
-		if (i1 == -1 || i2 == -1) {
-			return false;
+	public Iterator<Option<T>> apply(Iterator<Option<T>> resources) {
+		if (to == null) {
+			return new SliceIterator<>(resources, from);
+		} else {
+			return new SliceIterator<>(resources, from, to);
 		}
-		return i1 < i2;
 	}
-
 }
