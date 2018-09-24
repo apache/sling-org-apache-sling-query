@@ -31,31 +31,39 @@ import org.apache.sling.query.api.internal.Option;
  */
 public class LastIterator<T> extends AbstractIterator<Option<T>> {
 
-	private final Iterator<Option<T>> iterator;
+    private final Iterator<Option<T>> iterator;
 
-	private Option<T> previous;
+    private Option<T> previous;
 
-	public LastIterator(Iterator<Option<T>> iterator) {
-		this.iterator = iterator;
-	}
+    public LastIterator(Iterator<Option<T>> iterator) {
+        this.iterator = iterator;
+    }
 
-	@Override
-	protected Option<T> getElement() {
-		Option<T> candidate = previous;
-		
-		if (!iterator.hasNext()) {
-			previous = null;
-			return candidate;
-		} 
-		
-		if (candidate == null) {
-			candidate = iterator.next();
-			if (!iterator.hasNext()) {
-				return candidate;
-			}
-		}
-		previous = iterator.next();
-		return Option.empty(candidate.getArgumentId());
-	}
+    @Override
+    protected Option<T> getElement() {
+        Option<T> candidate = previous;
+        if (!iterator.hasNext()) {
+            previous = null;
+            return candidate;
+        }
+        if (candidate == null) {
+            candidate = iterator.next();
+        }
+        while (candidate.isEmpty() && iterator.hasNext()) {
+            candidate = iterator.next();
+        }
+        if (!iterator.hasNext()) {
+            return candidate;
+        }
+        Option<T> next = iterator.next();
+        while (next.isEmpty() && iterator.hasNext()) {
+            next = iterator.next();
+        }
+        if (!iterator.hasNext() && next.isEmpty()) {
+            return candidate;
+        }
+        previous = next;
+        return Option.empty(candidate.getArgumentId());
+    }
 
 }

@@ -28,19 +28,25 @@ import org.junit.Test;
 
 public class LastTest {
 
-	private static final String PAR_PATH = "home/java/labels/jcr:content/par";
+    private static final String PAR_PATH = "home/java/labels/jcr:content/par";
 
-	private Resource tree = TestUtils.getTree();
+    private Resource tree = TestUtils.getTree();
 
-	@Test
-	public void testLast() {
-		SlingQuery query = $(tree.getChild(PAR_PATH)).children().last();
-		assertResourceSetEquals(query.iterator(), "configvalue_2");
-	}
+    @Test
+    public void testLast() {
+        SlingQuery query = $(tree.getChild(PAR_PATH)).children().last();
+        assertResourceSetEquals(query.iterator(), "configvalue_2");
+    }
 
-	@Test
-	public void testLastOnEmptyCollection() {
-		SlingQuery query = $(tree).children("cq:Undefined").last();
-		assertEmptyIterator(query.iterator());
-	}
+    @Test
+    public void testLastOnEmptyCollection() {
+        SlingQuery query = $(tree).children("cq:Undefined").last();
+        assertEmptyIterator(query.iterator());
+    }
+    
+    @Test
+    public void testLastAfterFilter() {
+        SlingQuery query = $(tree.getChild(PAR_PATH)).children().filter("[key=helloWorld]").last();
+        assertResourceSetEquals(query.iterator(), "configvalue");
+    }
 }
