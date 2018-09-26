@@ -28,15 +28,15 @@ import org.apache.sling.query.impl.iterator.FilteringIterator;
 
 public class FilterFunction<T> implements IteratorToIteratorFunction<T> {
 
-	private final Predicate<T> predicate;
+    private final Predicate<T> predicate;
 
-	public FilterFunction(Predicate<T> predicate) {
-		this.predicate = predicate;
-	}
+    public FilterFunction(Predicate<T> predicate) {
+        this.predicate = predicate;
+    }
 
-	@Override
-	public Iterator<Option<T>> apply(Iterator<Option<T>> input) {
-		return new FilteringIterator<>(input, predicate);
-	}
+    @Override
+    public Iterator<Option<T>> apply(Iterator<Option<T>> input) {
+        return new FilteringIterator<>(input, predicate);
+    }
 
 }

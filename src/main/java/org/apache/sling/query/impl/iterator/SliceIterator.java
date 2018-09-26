@@ -25,42 +25,42 @@ import org.apache.sling.query.api.internal.Option;
 
 public class SliceIterator<T> extends AbstractIterator<Option<T>> {
 
-	private final Iterator<Option<T>> iterator;
+    private final Iterator<Option<T>> iterator;
 
-	private final int from;
+    private final int from;
 
-	private final int to;
+    private final int to;
 
-	private int current;
+    private int current;
 
-	public SliceIterator(Iterator<Option<T>> iterator, int from, int to) {
-		this.iterator = iterator;
-		this.current = -1;
-		this.from = from;
-		this.to = to;
-	}
+    public SliceIterator(Iterator<Option<T>> iterator, int from, int to) {
+        this.iterator = iterator;
+        this.current = -1;
+        this.from = from;
+        this.to = to;
+    }
 
-	public SliceIterator(Iterator<Option<T>> iterator, int from) {
-		this(iterator, from, Integer.MAX_VALUE);
-	}
+    public SliceIterator(Iterator<Option<T>> iterator, int from) {
+        this(iterator, from, Integer.MAX_VALUE);
+    }
 
-	@Override
-	protected Option<T> getElement() {
-		if (current > to) {
-			return null;
-		}
+    @Override
+    protected Option<T> getElement() {
+        if (current > to) {
+            return null;
+        }
 
-		if (iterator.hasNext()) {
-			Option<T> element = iterator.next();
-			if (element.isEmpty()) {
-				return element;
-			}
-			if (++current >= from && current <= to) {
-				return element;
-			} else {
-				return Option.empty(element.getArgumentId());
-			}
-		}
-		return null;
-	}
+        if (iterator.hasNext()) {
+            Option<T> element = iterator.next();
+            if (element.isEmpty()) {
+                return element;
+            }
+            if (++current >= from && current <= to) {
+                return element;
+            } else {
+                return Option.empty(element.getArgumentId());
+            }
+        }
+        return null;
+    }
 }

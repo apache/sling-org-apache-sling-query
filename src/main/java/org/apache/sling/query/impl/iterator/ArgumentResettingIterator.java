@@ -25,28 +25,28 @@ import org.apache.sling.query.api.internal.Option;
 
 public class ArgumentResettingIterator<T> implements Iterator<Option<T>> {
 
-	private final Iterator<Option<T>> iterator;
+    private final Iterator<Option<T>> iterator;
 
-	private int index;
+    private int index;
 
-	public ArgumentResettingIterator(Iterator<Option<T>> iterator) {
-		this.iterator = iterator;
-		this.index = 0;
-	}
+    public ArgumentResettingIterator(Iterator<Option<T>> iterator) {
+        this.iterator = iterator;
+        this.index = 0;
+    }
 
-	@Override
-	public boolean hasNext() {
-		return iterator.hasNext();
-	}
+    @Override
+    public boolean hasNext() {
+        return iterator.hasNext();
+    }
 
-	@Override
-	public Option<T> next() {
-		return Option.of(iterator.next().getElement(), index++);
-	}
+    @Override
+    public Option<T> next() {
+        return Option.of(iterator.next().getElement(), index++);
+    }
 
-	@Override
-	public void remove() {
-		iterator.remove();
-	}
+    @Override
+    public void remove() {
+        iterator.remove();
+    }
 
 }

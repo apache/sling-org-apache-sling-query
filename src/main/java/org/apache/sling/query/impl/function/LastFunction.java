@@ -27,9 +27,9 @@ import org.apache.sling.query.impl.iterator.LastIterator;
 
 public class LastFunction<T> implements IteratorToIteratorFunction<T> {
 
-	@Override
-	public Iterator<Option<T>> apply(Iterator<Option<T>> input) {
-		return new LastIterator<>(input);
-	}
+    @Override
+    public Iterator<Option<T>> apply(Iterator<Option<T>> input) {
+        return new LastIterator<>(input);
+    }
 
 }

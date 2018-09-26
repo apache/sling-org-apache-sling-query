@@ -27,15 +27,15 @@ import org.apache.sling.query.impl.iterator.ReverseIterator;
 
 public class NotFunction<T> implements IteratorToIteratorFunction<T> {
 
-	private IteratorToIteratorFunction<T> function;
+    private IteratorToIteratorFunction<T> function;
 
-	public NotFunction(IteratorToIteratorFunction<T> function) {
-		this.function = function;
-	}
+    public NotFunction(IteratorToIteratorFunction<T> function) {
+        this.function = function;
+    }
 
-	@Override
-	public Iterator<Option<T>> apply(Iterator<Option<T>> input) {
-		return new ReverseIterator<>(function, input);
-	}
+    @Override
+    public Iterator<Option<T>> apply(Iterator<Option<T>> input) {
+        return new ReverseIterator<>(function, input);
+    }
 
 }

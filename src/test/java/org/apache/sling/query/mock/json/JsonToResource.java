@@ -34,44 +34,44 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 
 public final class JsonToResource {
-	private JsonToResource() {
-	}
+    private JsonToResource() {
+    }
 
-	public static Resource parse(InputStream inputStream) {
-		JsonElement element = new JsonParser().parse(new InputStreamReader(inputStream));
-		return parseResource(element.getAsJsonObject(), "/", null);
-	}
+    public static Resource parse(InputStream inputStream) {
+        JsonElement element = new JsonParser().parse(new InputStreamReader(inputStream));
+        return parseResource(element.getAsJsonObject(), "/", null);
+    }
 
-	private static Resource parseResource(JsonElement object, String name, Resource parent) {
-		if (object.isJsonArray()) {
-			return parseResource(object.getAsJsonArray(), name, parent);
-		} else if (object.isJsonPrimitive()) {
-			return parseResource(object.getAsJsonPrimitive(), name, parent);
-		} else if (object.isJsonObject()) {
-			return parseResource(object.getAsJsonObject(), name, parent);
-		} else {
-			return null;
-		}
-	}
+    private static Resource parseResource(JsonElement object, String name, Resource parent) {
+        if (object.isJsonArray()) {
+            return parseResource(object.getAsJsonArray(), name, parent);
+        } else if (object.isJsonPrimitive()) {
+            return parseResource(object.getAsJsonPrimitive(), name, parent);
+        } else if (object.isJsonObject()) {
+            return parseResource(object.getAsJsonObject(), name, parent);
+        } else {
+            return null;
+        }
+    }
 
-	private static Resource parseResource(JsonArray array, String name, Resource parent) {
-		final String[] values = new String[array.size()];
-		int i = 0;
-		for (JsonElement e : array) {
-			values[i++] = e.getAsString();
-		}
-		return new PropertyResourceMock(parent, name, values);
-	}
+    private static Resource parseResource(JsonArray array, String name, Resource parent) {
+        final String[] values = new String[array.size()];
+        int i = 0;
+        for (JsonElement e : array) {
+            values[i++] = e.getAsString();
+        }
+        return new PropertyResourceMock(parent, name, values);
+    }
 
-	private static Resource parseResource(JsonPrimitive primitive, String name, Resource parent) {
-		return new PropertyResourceMock(parent, name, primitive.getAsString());
-	}
+    private static Resource parseResource(JsonPrimitive primitive, String name, Resource parent) {
+        return new PropertyResourceMock(parent, name, primitive.getAsString());
+    }
 
-	private static Resource parseResource(JsonObject object, String name, Resource parent) {
-		ResourceMock resource = new ResourceMock(parent, name);
-		for (Entry<String, JsonElement> entry : object.entrySet()) {
-			resource.addChild(parseResource(entry.getValue(), entry.getKey(), resource));
-		}
-		return resource;
-	}
+    private static Resource parseResource(JsonObject object, String name, Resource parent) {
+        ResourceMock resource = new ResourceMock(parent, name);
+        for (Entry<String, JsonElement> entry : object.entrySet()) {
+            resource.addChild(parseResource(entry.getValue(), entry.getKey(), resource));
+        }
+        return resource;
+    }
 }

@@ -26,22 +26,22 @@ import java.util.function.Predicate;
 
 public class IterableContainsPredicate<T> implements Predicate<T> {
 
-	private final Iterable<T> iterable;
+    private final Iterable<T> iterable;
 
-	private final TreeProvider<T> provider;
+    private final TreeProvider<T> provider;
 
-	public IterableContainsPredicate(Iterable<T> iterable, TreeProvider<T> provider) {
-		this.iterable = new LazyList<T>(iterable.iterator());
-		this.provider = provider;
-	}
+    public IterableContainsPredicate(Iterable<T> iterable, TreeProvider<T> provider) {
+        this.iterable = new LazyList<T>(iterable.iterator());
+        this.provider = provider;
+    }
 
-	@Override
-	public boolean test(T element) {
-		for (T t : iterable) {
-			if (provider.sameElement(t, element)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean test(T element) {
+        for (T t : iterable) {
+            if (provider.sameElement(t, element)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

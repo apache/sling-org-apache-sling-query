@@ -25,24 +25,24 @@ import org.apache.sling.query.api.internal.Option;
 
 public class OptionStrippingIterator<T> implements Iterator<T> {
 
-	private final Iterator<Option<T>> iterator;
+    private final Iterator<Option<T>> iterator;
 
-	public OptionStrippingIterator(Iterator<Option<T>> iterator) {
-		this.iterator = iterator;
-	}
+    public OptionStrippingIterator(Iterator<Option<T>> iterator) {
+        this.iterator = iterator;
+    }
 
-	@Override
-	public boolean hasNext() {
-		return iterator.hasNext();
-	}
+    @Override
+    public boolean hasNext() {
+        return iterator.hasNext();
+    }
 
-	@Override
-	public T next() {
-		return iterator.next().getElement();
-	}
+    @Override
+    public T next() {
+        return iterator.next().getElement();
+    }
 
-	@Override
-	public void remove() {
-		iterator.remove();
-	}
+    @Override
+    public void remove() {
+        iterator.remove();
+    }
 }

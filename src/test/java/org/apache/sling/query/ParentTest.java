@@ -28,17 +28,17 @@ import org.junit.Test;
 
 public class ParentTest {
 
-	private Resource tree = TestUtils.getTree();
+    private Resource tree = TestUtils.getTree();
 
-	@Test
-	public void testParent() {
-		SlingQuery query = $(tree.getChild("application/configuration/labels")).parent();
-		assertResourceSetEquals(query.iterator(), "configuration");
-	}
+    @Test
+    public void testParent() {
+        SlingQuery query = $(tree.getChild("application/configuration/labels")).parent();
+        assertResourceSetEquals(query.iterator(), "configuration");
+    }
 
-	@Test
-	public void testRootParent() {
-		SlingQuery query = $(tree).parent();
-		assertEmptyIterator(query.iterator());
-	}
+    @Test
+    public void testRootParent() {
+        SlingQuery query = $(tree).parent();
+        assertEmptyIterator(query.iterator());
+    }
 }

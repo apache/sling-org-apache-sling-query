@@ -30,36 +30,35 @@ import org.junit.Test;
 
 public class NotTest {
 
-	private Resource tree = TestUtils.getTree();
+    private Resource tree = TestUtils.getTree();
 
-	@Test
-	public void testNot() {
-		SlingQuery query = $(tree).children().not("cq:Page");
-		assertResourceSetEquals(query.iterator(), "jcr:content");
-	}
+    @Test
+    public void testNot() {
+        SlingQuery query = $(tree).children().not("cq:Page");
+        assertResourceSetEquals(query.iterator(), "jcr:content");
+    }
 
-	@Test
-	public void testNotResources() {
-		SlingQuery query = $(tree).children().not(
-				$(tree.getChild("jcr:content"), tree.getChild("application")));
-		assertResourceSetEquals(query.iterator(), "home");
-	}
+    @Test
+    public void testNotResources() {
+        SlingQuery query = $(tree).children().not($(tree.getChild("jcr:content"), tree.getChild("application")));
+        assertResourceSetEquals(query.iterator(), "home");
+    }
 
-	@Test
-	public void testNotEmptyResources() {
-		SlingQuery query = $(tree).children().not(Collections.<Resource>emptyList());
-		assertResourceSetEquals(query.iterator(), "jcr:content", "application", "home");
-	}
+    @Test
+    public void testNotEmptyResources() {
+        SlingQuery query = $(tree).children().not(Collections.<Resource>emptyList());
+        assertResourceSetEquals(query.iterator(), "jcr:content", "application", "home");
+    }
 
-	@Test
-	public void testNotWithModifier() {
-		SlingQuery query = $(tree).children("cq:Page").not(":first");
-		assertResourceSetEquals(query.iterator(), "home");
-	}
+    @Test
+    public void testNotWithModifier() {
+        SlingQuery query = $(tree).children("cq:Page").not(":first");
+        assertResourceSetEquals(query.iterator(), "home");
+    }
 
-	@Test
-	public void testNotOnEmptyCollection() {
-		SlingQuery query = $(tree).children("cq:Undefined").not("cq:Page");
-		assertEmptyIterator(query.iterator());
-	}
+    @Test
+    public void testNotOnEmptyCollection() {
+        SlingQuery query = $(tree).children("cq:Undefined").not("cq:Page");
+        assertEmptyIterator(query.iterator());
+    }
 }

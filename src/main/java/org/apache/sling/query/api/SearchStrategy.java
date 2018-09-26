@@ -23,5 +23,5 @@ import org.osgi.annotation.versioning.ProviderType;
 
 @ProviderType
 public enum SearchStrategy {
-	BFS, DFS, QUERY
+    BFS, DFS, QUERY
 }

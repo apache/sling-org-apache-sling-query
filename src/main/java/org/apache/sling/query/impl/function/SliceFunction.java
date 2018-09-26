@@ -27,26 +27,26 @@ import org.apache.sling.query.impl.iterator.SliceIterator;
 
 public class SliceFunction<T> implements IteratorToIteratorFunction<T> {
 
-	private final int from;
+    private final int from;
 
-	private final Integer to;
+    private final Integer to;
 
-	public SliceFunction(int from, int to) {
-		this.from = from;
-		this.to = to;
-	}
+    public SliceFunction(int from, int to) {
+        this.from = from;
+        this.to = to;
+    }
 
-	public SliceFunction(int from) {
-		this.from = from;
-		this.to = null;
-	}
+    public SliceFunction(int from) {
+        this.from = from;
+        this.to = null;
+    }
 
-	@Override
-	public Iterator<Option<T>> apply(Iterator<Option<T>> resources) {
-		if (to == null) {
-			return new SliceIterator<>(resources, from);
-		} else {
-			return new SliceIterator<>(resources, from, to);
-		}
-	}
+    @Override
+    public Iterator<Option<T>> apply(Iterator<Option<T>> resources) {
+        if (to == null) {
+            return new SliceIterator<>(resources, from);
+        } else {
+            return new SliceIterator<>(resources, from, to);
+        }
+    }
 }

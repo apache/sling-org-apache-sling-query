@@ -27,20 +27,20 @@ import org.junit.Test;
 
 public class MultipleSelectorTest {
 
-	private Resource tree = TestUtils.getTree();
+    private Resource tree = TestUtils.getTree();
 
-	@Test
-	public void testTwoNames() {
-		SlingQuery query = $(tree).children("#application, #home");
-		assertResourceSetEquals(query.iterator(), "application", "home");
-	}
+    @Test
+    public void testTwoNames() {
+        SlingQuery query = $(tree).children("#application, #home");
+        assertResourceSetEquals(query.iterator(), "application", "home");
+    }
 
-	@Test
-	public void testEverything() {
-		SlingQuery query = $(tree).children(":not(#application), #application");
-		assertResourceSetEquals(query.iterator(), "jcr:content", "application", "home");
+    @Test
+    public void testEverything() {
+        SlingQuery query = $(tree).children(":not(#application), #application");
+        assertResourceSetEquals(query.iterator(), "jcr:content", "application", "home");
 
-		query = $(tree).children("#application, :not(#application)");
-		assertResourceSetEquals(query.iterator(), "jcr:content", "application", "home");
-	}
+        query = $(tree).children("#application, :not(#application)");
+        assertResourceSetEquals(query.iterator(), "jcr:content", "application", "home");
+    }
 }

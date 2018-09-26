@@ -35,19 +35,19 @@ import static org.apache.sling.query.TestUtils.l;
 
 public class ReverseTest {
 
-	@Test
-	public void testReverse() {
-		test(l("a", "b", "c", "d", "e"), l(null, null, null, null, null), new IdentityFunction<String>());
-		test(l("a", "b", "c", "d", "e"), l("a", null, null, null, null), new SliceFunction<String>(1));
-		test(l("a", "b", "c", "d", "e"), l(null, null, null, "d", "e"), new SliceFunction<String>(0, 2));
-	}
+    @Test
+    public void testReverse() {
+        test(l("a", "b", "c", "d", "e"), l(null, null, null, null, null), new IdentityFunction<String>());
+        test(l("a", "b", "c", "d", "e"), l("a", null, null, null, null), new SliceFunction<String>(1));
+        test(l("a", "b", "c", "d", "e"), l(null, null, null, "d", "e"), new SliceFunction<String>(0, 2));
+    }
 
-	private static <T> void test(List<T> input, List<T> output, IteratorToIteratorFunction<T> function) {
-		List<Option<T>> optionInput = TestUtils.optionList(input);
-		List<Option<T>> expectedOutput = TestUtils.optionList(output);
-		Iterator<Option<T>> actualOutputIterator = new ReverseIterator<T>(function, optionInput.iterator());
-		List<Option<T>> actualOutput = TestUtils.iteratorToList(actualOutputIterator);
-		Assert.assertEquals(expectedOutput, actualOutput);
-	}
+    private static <T> void test(List<T> input, List<T> output, IteratorToIteratorFunction<T> function) {
+        List<Option<T>> optionInput = TestUtils.optionList(input);
+        List<Option<T>> expectedOutput = TestUtils.optionList(output);
+        Iterator<Option<T>> actualOutputIterator = new ReverseIterator<T>(function, optionInput.iterator());
+        List<Option<T>> actualOutput = TestUtils.iteratorToList(actualOutputIterator);
+        Assert.assertEquals(expectedOutput, actualOutput);
+    }
 
 }

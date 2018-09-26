@@ -27,9 +27,9 @@ import org.apache.sling.query.impl.iterator.UniqueIterator;
 
 public class UniqueFunction<T> implements IteratorToIteratorFunction<T> {
 
-	@Override
-	public Iterator<Option<T>> apply(Iterator<Option<T>> input) {
-		return new UniqueIterator<>(input);
-	}
+    @Override
+    public Iterator<Option<T>> apply(Iterator<Option<T>> input) {
+        return new UniqueIterator<>(input);
+    }
 
 }

@@ -27,30 +27,30 @@ import org.apache.sling.query.impl.util.LazyList;
 
 public class ReverseIterator<T> extends AbstractIterator<Option<T>> {
 
-	private final Iterator<Option<T>> filtered;
+    private final Iterator<Option<T>> filtered;
 
-	private final Iterator<Option<T>> original;
+    private final Iterator<Option<T>> original;
 
-	public ReverseIterator(IteratorToIteratorFunction<T> function, Iterator<Option<T>> input) {
-		LazyList<Option<T>> lazyList = new LazyList<Option<T>>(input);
-		filtered = function.apply(lazyList.listIterator());
-		original = lazyList.listIterator();
-	}
+    public ReverseIterator(IteratorToIteratorFunction<T> function, Iterator<Option<T>> input) {
+        LazyList<Option<T>> lazyList = new LazyList<Option<T>>(input);
+        filtered = function.apply(lazyList.listIterator());
+        original = lazyList.listIterator();
+    }
 
-	@Override
-	protected Option<T> getElement() {
-		if (original.hasNext()) {
-			Option<T> originalElement = original.next();
-			Option<T> filteredElement = null;
-			if (filtered.hasNext()) {
-				filteredElement = filtered.next();
-			}
-			if (filteredElement == null || filteredElement.isEmpty()) {
-				return originalElement;
-			} else {
-				return Option.empty(originalElement.getArgumentId());
-			}
-		}
-		return null;
-	}
+    @Override
+    protected Option<T> getElement() {
+        if (original.hasNext()) {
+            Option<T> originalElement = original.next();
+            Option<T> filteredElement = null;
+            if (filtered.hasNext()) {
+                filteredElement = filtered.next();
+            }
+            if (filteredElement == null || filteredElement.isEmpty()) {
+                return originalElement;
+            } else {
+                return Option.empty(originalElement.getArgumentId());
+            }
+        }
+        return null;
+    }
 }

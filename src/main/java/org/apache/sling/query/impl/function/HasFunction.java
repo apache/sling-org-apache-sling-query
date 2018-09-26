@@ -33,38 +33,38 @@ import org.apache.sling.query.impl.util.IteratorUtils;
 
 public class HasFunction<T> implements ElementToIteratorFunction<T> {
 
-	private final IteratorToIteratorFunction<T> findFunction;
+    private final IteratorToIteratorFunction<T> findFunction;
 
-	private final IteratorToIteratorFunction<T> filter;
+    private final IteratorToIteratorFunction<T> filter;
 
-	private HasFunction(FindFunction<T> findFunction, IteratorToIteratorFunction<T> filter) {
-		this.findFunction = new IteratorToIteratorFunctionWrapper<T>(findFunction);
-		this.filter = filter;
-	}
+    private HasFunction(FindFunction<T> findFunction, IteratorToIteratorFunction<T> filter) {
+        this.findFunction = new IteratorToIteratorFunctionWrapper<T>(findFunction);
+        this.filter = filter;
+    }
 
-	public HasFunction(String selectorString, SearchStrategy searchStrategy, TreeProvider<T> provider) {
-		this(new FindFunction<T>(searchStrategy, provider, selectorString), new SelectorFunction<T>(
-				selectorString, provider, searchStrategy));
-	}
+    public HasFunction(String selectorString, SearchStrategy searchStrategy, TreeProvider<T> provider) {
+        this(new FindFunction<T>(searchStrategy, provider, selectorString),
+                new SelectorFunction<T>(selectorString, provider, searchStrategy));
+    }
 
-	public HasFunction(Predicate<T> predicate, SearchStrategy searchStrategy, TreeProvider<T> provider) {
-		this(new FindFunction<>(searchStrategy, provider, ""), new FilterFunction<T>(predicate));
-	}
+    public HasFunction(Predicate<T> predicate, SearchStrategy searchStrategy, TreeProvider<T> provider) {
+        this(new FindFunction<>(searchStrategy, provider, ""), new FilterFunction<T>(predicate));
+    }
 
-	public HasFunction(Iterable<T> iterable, TreeProvider<T> provider) {
-		this.findFunction = new DescendantFunction<>(iterable, provider);
-		this.filter = new IdentityFunction<>();
-	}
+    public HasFunction(Iterable<T> iterable, TreeProvider<T> provider) {
+        this.findFunction = new DescendantFunction<>(iterable, provider);
+        this.filter = new IdentityFunction<>();
+    }
 
-	@Override
-	public Iterator<T> apply(T input) {
-		Iterator<Option<T>> iterator = IteratorUtils.singleElementIterator(Option.of(input, 0));
-		iterator = findFunction.apply(iterator);
-		iterator = filter.apply(iterator);
-		if (new EmptyElementFilter<>(iterator).hasNext()) {
-			return IteratorUtils.singleElementIterator(input);
-		} else {
-			return IteratorUtils.emptyIterator();
-		}
-	}
+    @Override
+    public Iterator<T> apply(T input) {
+        Iterator<Option<T>> iterator = IteratorUtils.singleElementIterator(Option.of(input, 0));
+        iterator = findFunction.apply(iterator);
+        iterator = filter.apply(iterator);
+        if (new EmptyElementFilter<>(iterator).hasNext()) {
+            return IteratorUtils.singleElementIterator(input);
+        } else {
+            return IteratorUtils.emptyIterator();
+        }
+    }
 }

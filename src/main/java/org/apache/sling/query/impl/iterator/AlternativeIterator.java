@@ -26,19 +26,19 @@ import org.apache.sling.query.api.internal.Option;
 
 public class AlternativeIterator<T> extends AbstractIterator<Option<T>> {
 
-	private final List<Iterator<Option<T>>> iterators;
+    private final List<Iterator<Option<T>>> iterators;
 
-	public AlternativeIterator(List<Iterator<Option<T>>> iterators) {
-		this.iterators = iterators;
-	}
+    public AlternativeIterator(List<Iterator<Option<T>>> iterators) {
+        this.iterators = iterators;
+    }
 
-	@Override
-	protected Option<T> getElement() {
-		for (Iterator<Option<T>> i : iterators) {
-			if (i.hasNext()) {
-				return i.next();
-			}
-		}
-		return null;
-	}
+    @Override
+    protected Option<T> getElement() {
+        for (Iterator<Option<T>> i : iterators) {
+            if (i.hasNext()) {
+                return i.next();
+            }
+        }
+        return null;
+    }
 }

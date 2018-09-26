@@ -27,20 +27,20 @@ import org.apache.sling.query.impl.util.IteratorUtils;
 
 public class ParentFunction<T> implements ElementToIteratorFunction<T> {
 
-	private final TreeProvider<T> provider;
+    private final TreeProvider<T> provider;
 
-	public ParentFunction(TreeProvider<T> provider) {
-		this.provider = provider;
-	}
+    public ParentFunction(TreeProvider<T> provider) {
+        this.provider = provider;
+    }
 
-	@Override
-	public Iterator<T> apply(T element) {
-		T parent = provider.getParent(element);
-		if (parent == null) {
-			return IteratorUtils.emptyIterator();
-		} else {
-			return IteratorUtils.singleElementIterator(parent);
-		}
-	}
+    @Override
+    public Iterator<T> apply(T element) {
+        T parent = provider.getParent(element);
+        if (parent == null) {
+            return IteratorUtils.emptyIterator();
+        } else {
+            return IteratorUtils.singleElementIterator(parent);
+        }
+    }
 
 }

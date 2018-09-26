@@ -21,14 +21,14 @@ package org.apache.sling.query.impl.resource.jcr.query;
 
 public class Atomic implements Term {
 
-	private final String condition;
+    private final String condition;
 
-	public Atomic(String condition) {
-		this.condition = condition;
-	}
+    public Atomic(String condition) {
+        this.condition = condition;
+    }
 
-	@Override
-	public String buildString() {
-		return condition;
-	}
+    @Override
+    public String buildString() {
+        return condition;
+    }
 }

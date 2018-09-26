@@ -26,9 +26,9 @@ import org.apache.sling.query.api.internal.Option;
 
 public class IdentityFunction<T> implements IteratorToIteratorFunction<T> {
 
-	@Override
-	public Iterator<Option<T>> apply(Iterator<Option<T>> input) {
-		return input;
-	}
+    @Override
+    public Iterator<Option<T>> apply(Iterator<Option<T>> input) {
+        return input;
+    }
 
 }

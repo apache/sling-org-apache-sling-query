@@ -28,18 +28,18 @@ import org.apache.sling.query.impl.iterator.ParentsIterator;
 
 public class ParentsFunction<T> implements ElementToIteratorFunction<T> {
 
-	private final Predicate<T> until;
+    private final Predicate<T> until;
 
-	private final TreeProvider<T> provider;
+    private final TreeProvider<T> provider;
 
-	public ParentsFunction(Predicate<T> until, TreeProvider<T> provider) {
-		this.until = until;
-		this.provider = provider;
-	}
+    public ParentsFunction(Predicate<T> until, TreeProvider<T> provider) {
+        this.until = until;
+        this.provider = provider;
+    }
 
-	@Override
-	public Iterator<T> apply(T resource) {
-		return new ParentsIterator<>(until, resource, provider);
-	}
+    @Override
+    public Iterator<T> apply(T resource) {
+        return new ParentsIterator<>(until, resource, provider);
+    }
 
 }

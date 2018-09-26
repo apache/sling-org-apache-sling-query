@@ -26,41 +26,41 @@ import org.apache.sling.query.impl.selector.parser.Attribute;
 import java.util.function.Predicate;
 
 public class ResourcePropertyPredicate implements Predicate<Resource> {
-	private final String key;
+    private final String key;
 
-	private final String value;
+    private final String value;
 
-	private final SelectorOperator operator;
+    private final SelectorOperator operator;
 
-	public ResourcePropertyPredicate(Attribute attribute) {
-		this.key = attribute.getKey();
-		this.value = attribute.getValue();
-		this.operator = SelectorOperator.getSelectorOperator(attribute.getOperator());
-	}
+    public ResourcePropertyPredicate(Attribute attribute) {
+        this.key = attribute.getKey();
+        this.value = attribute.getValue();
+        this.operator = SelectorOperator.getSelectorOperator(attribute.getOperator());
+    }
 
-	@Override
-	public boolean test(Resource resource) {
-		Resource property = resource.getChild(key);
-		if (property == null) {
-			return false;
-		} else if (value == null) {
-			return true;
-		} else {
-			return isEqualToValue(property);
-		}
-	}
+    @Override
+    public boolean test(Resource resource) {
+        Resource property = resource.getChild(key);
+        if (property == null) {
+            return false;
+        } else if (value == null) {
+            return true;
+        } else {
+            return isEqualToValue(property);
+        }
+    }
 
-	private boolean isEqualToValue(Resource property) {
-		final String[] multiProperty = property.adaptTo(String[].class);
-		if (multiProperty != null) {
-			for (String p : multiProperty) {
-				if (operator.accepts(p, value)) {
-					return true;
-				}
-			}
-			return false;
-		} else {
-			return operator.accepts(property.adaptTo(String.class), value);
-		}
-	}
+    private boolean isEqualToValue(Resource property) {
+        final String[] multiProperty = property.adaptTo(String[].class);
+        if (multiProperty != null) {
+            for (String p : multiProperty) {
+                if (operator.accepts(p, value)) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            return operator.accepts(property.adaptTo(String.class), value);
+        }
+    }
 }

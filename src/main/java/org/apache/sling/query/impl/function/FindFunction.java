@@ -35,41 +35,40 @@ import org.apache.sling.query.impl.selector.parser.SelectorSegment;
 
 public class FindFunction<T> implements ElementToIteratorFunction<T> {
 
-	private final List<SelectorSegment> preFilteringSelector;
+    private final List<SelectorSegment> preFilteringSelector;
 
-	private final TreeProvider<T> provider;
+    private final TreeProvider<T> provider;
 
-	private final SearchStrategy strategy;
+    private final SearchStrategy strategy;
 
-	public FindFunction(SearchStrategy searchStrategy, TreeProvider<T> provider,
-			SelectorSegment preFilteringSelector) {
-		this.strategy = searchStrategy;
-		this.provider = provider;
-		this.preFilteringSelector = Arrays.asList(preFilteringSelector);
-	}
+    public FindFunction(SearchStrategy searchStrategy, TreeProvider<T> provider, SelectorSegment preFilteringSelector) {
+        this.strategy = searchStrategy;
+        this.provider = provider;
+        this.preFilteringSelector = Arrays.asList(preFilteringSelector);
+    }
 
-	public FindFunction(SearchStrategy searchStrategy, TreeProvider<T> provider, String preFilteringSelector) {
-		this.strategy = searchStrategy;
-		this.provider = provider;
-		List<Selector> selectors = SelectorParser.parse(preFilteringSelector);
-		this.preFilteringSelector = SelectorParser.getFirstSegmentFromEachSelector(selectors);
-	}
+    public FindFunction(SearchStrategy searchStrategy, TreeProvider<T> provider, String preFilteringSelector) {
+        this.strategy = searchStrategy;
+        this.provider = provider;
+        List<Selector> selectors = SelectorParser.parse(preFilteringSelector);
+        this.preFilteringSelector = SelectorParser.getFirstSegmentFromEachSelector(selectors);
+    }
 
-	@Override
-	public Iterator<T> apply(T input) {
-		Iterator<T> iterator;
-		switch (strategy) {
-			case BFS:
-				iterator = new BfsTreeIterator<T>(input, provider);
-				break;
-			case QUERY:
-				iterator = provider.query(preFilteringSelector, input);
-				break;
-			case DFS:
-			default:
-				iterator = new DfsTreeIterator<>(input, provider);
-				break;
-		}
-		return new WarningIterator<>(iterator);
-	}
+    @Override
+    public Iterator<T> apply(T input) {
+        Iterator<T> iterator;
+        switch (strategy) {
+        case BFS:
+            iterator = new BfsTreeIterator<T>(input, provider);
+            break;
+        case QUERY:
+            iterator = provider.query(preFilteringSelector, input);
+            break;
+        case DFS:
+        default:
+            iterator = new DfsTreeIterator<>(input, provider);
+            break;
+        }
+        return new WarningIterator<>(iterator);
+    }
 }

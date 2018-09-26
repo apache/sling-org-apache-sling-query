@@ -34,57 +34,60 @@ import org.osgi.annotation.versioning.ProviderType;
 @ProviderType
 public class SlingQuery extends AbstractQuery<Resource, SlingQuery> {
 
-	private SlingQuery(AbstractQuery<Resource, SlingQuery> original, SearchStrategy strategy) {
-		super(original, strategy);
-	}
+    private SlingQuery(AbstractQuery<Resource, SlingQuery> original, SearchStrategy strategy) {
+        super(original, strategy);
+    }
 
-	private SlingQuery(Resource[] resources, SearchStrategy strategy) {
-		super(new ResourceTreeProvider(resources[0].getResourceResolver()), resources, strategy);
-	}
+    private SlingQuery(Resource[] resources, SearchStrategy strategy) {
+        super(new ResourceTreeProvider(resources[0].getResourceResolver()), resources, strategy);
+    }
 
-	public static SlingQuery $(Resource... resources) {
-		if (resources.length == 0) {
-			throw new IllegalArgumentException("Initial collection can't be empty");
-		} else {
-			return new SlingQuery(resources, SearchStrategy.QUERY);
-		}
-	}
+    public static SlingQuery $(Resource... resources) {
+        if (resources.length == 0) {
+            throw new IllegalArgumentException("Initial collection can't be empty");
+        } else {
+            return new SlingQuery(resources, SearchStrategy.QUERY);
+        }
+    }
 
-	public static SlingQuery $(ResourceResolver resolver) {
-		return $(resolver.getResource("/"));
-	}
+    public static SlingQuery $(ResourceResolver resolver) {
+        return $(resolver.getResource("/"));
+    }
 
-	/**
-	 * Transform the whole collection to a new {@link Iterable} object, invoking
-	 * {@link Adaptable#adaptTo(Class)} method on each Resource. If some Resource can't be adapted to the
-	 * class (eg. {@code adaptTo()} returns {@code null}), it will be skipped.
-	 * 
-	 * @param clazz Class used to adapt the Resources
-	 * @param <E> type of the clazz
-	 * @return new iterable containing succesfully adapted Resources
-	 */
-	public <E> Iterable<E> map(final Class<? extends E> clazz) {
-		return () -> new AdaptToIterator<>(SlingQuery.this.iterator(), clazz);
-	}
+    /**
+     * Transform the whole collection to a new {@link Iterable} object, invoking
+     * {@link Adaptable#adaptTo(Class)} method on each Resource. If some Resource
+     * can't be adapted to the class (eg. {@code adaptTo()} returns {@code null}),
+     * it will be skipped.
+     * 
+     * @param clazz
+     *            Class used to adapt the Resources
+     * @param <E>
+     *            type of the clazz
+     * @return new iterable containing succesfully adapted Resources
+     */
+    public <E> Iterable<E> map(final Class<? extends E> clazz) {
+        return () -> new AdaptToIterator<>(SlingQuery.this.iterator(), clazz);
+    }
 
-	@Override
-	protected SlingQuery clone(AbstractQuery<Resource, SlingQuery> original, SearchStrategy strategy) {
-		return new SlingQuery(original, strategy);
-	}
+    @Override
+    protected SlingQuery clone(AbstractQuery<Resource, SlingQuery> original, SearchStrategy strategy) {
+        return new SlingQuery(original, strategy);
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("$(");
-		Iterator<Resource> iterator = this.iterator();
-		while (iterator.hasNext()) {
-			builder.append(iterator.next().getPath());
-			if (iterator.hasNext()) {
-				builder.append(", ");
-			}
-		}
-		builder.append(")");
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("$(");
+        Iterator<Resource> iterator = this.iterator();
+        while (iterator.hasNext()) {
+            builder.append(iterator.next().getPath());
+            if (iterator.hasNext()) {
+                builder.append(", ");
+            }
+        }
+        builder.append(")");
+        return builder.toString();
+    }
 
 }

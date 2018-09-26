@@ -20,5 +20,5 @@
 package org.apache.sling.query.impl.resource.jcr.query;
 
 public interface Term {
-	String buildString();
+    String buildString();
 }

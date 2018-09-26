@@ -33,57 +33,57 @@ import org.apache.sling.query.api.internal.Option;
  */
 public class SuppIterator<T> extends AbstractIterator<Option<T>> {
 
-	private final List<Option<T>> input;
+    private final List<Option<T>> input;
 
-	private final Iterator<Option<T>> output;
+    private final Iterator<Option<T>> output;
 
-	private Option<T> outputElement;
+    private Option<T> outputElement;
 
-	private int currentIndex = 0;
+    private int currentIndex = 0;
 
-	public SuppIterator(List<Option<T>> input, IteratorToIteratorFunction<T> function) {
-		this.input = input;
-		this.output = function.apply(new ArgumentResettingIterator<T>(input.iterator()));
-	}
+    public SuppIterator(List<Option<T>> input, IteratorToIteratorFunction<T> function) {
+        this.input = input;
+        this.output = function.apply(new ArgumentResettingIterator<T>(input.iterator()));
+    }
 
-	/**
-	 * The idea behind this method is that index of each element in the input
-	 * iterator is passed to the function. One or more Option<T> items for each
-	 * index will be returned. If any Option<T> item in that index set is not
-	 * empty then the corresponding element in the input will be returned.
-	 */
-	@Override
-	protected Option<T> getElement() {
-		if (outputElement == null) {
-			if (!output.hasNext()) {
-				return null;
-			}
-			outputElement = output.next();
-		}
+    /**
+     * The idea behind this method is that index of each element in the input
+     * iterator is passed to the function. One or more Option<T> items for each
+     * index will be returned. If any Option<T> item in that index set is not empty
+     * then the corresponding element in the input will be returned.
+     */
+    @Override
+    protected Option<T> getElement() {
+        if (outputElement == null) {
+            if (!output.hasNext()) {
+                return null;
+            }
+            outputElement = output.next();
+        }
 
-		int outputIndex = outputElement.getArgumentId();
-		boolean emptyResponse = outputElement.isEmpty();
+        int outputIndex = outputElement.getArgumentId();
+        boolean emptyResponse = outputElement.isEmpty();
 
-		//loop to next index or end of list
-		while (outputIndex <= currentIndex && output.hasNext()) {
-			if (emptyResponse) {
-				emptyResponse = outputElement.isEmpty();
-			}
-			outputElement = output.next();
-			outputIndex = outputElement.getArgumentId();
-		}
+        // loop to next index or end of list
+        while (outputIndex <= currentIndex && output.hasNext()) {
+            if (emptyResponse) {
+                emptyResponse = outputElement.isEmpty();
+            }
+            outputElement = output.next();
+            outputIndex = outputElement.getArgumentId();
+        }
 
-		if (emptyResponse) {
-			if (outputIndex > currentIndex) {
-				return Option.empty(currentIndex++);
-			}
-			return null;
-		}
+        if (emptyResponse) {
+            if (outputIndex > currentIndex) {
+                return Option.empty(currentIndex++);
+            }
+            return null;
+        }
 
-		if (outputIndex <= currentIndex) {
-			outputElement = null;
-		}
-		return input.get(currentIndex++);
-	}
+        if (outputIndex <= currentIndex) {
+            outputElement = null;
+        }
+        return input.get(currentIndex++);
+    }
 
 }

@@ -29,16 +29,16 @@ import org.junit.Test;
 
 public class MapTest {
 
-	private static final String PAR_PATH = "home/java/labels/jcr:content/par";
+    private static final String PAR_PATH = "home/java/labels/jcr:content/par";
 
-	private Resource tree = TestUtils.getTree();
+    private Resource tree = TestUtils.getTree();
 
-	@Test
-	public void testMap() {
-		@SuppressWarnings("rawtypes")
-		Iterable<Map> iterable = $(tree.getChild(PAR_PATH)).children().map(Map.class);
-		for (Map<?, ?> m : iterable) {
-			Assert.assertEquals("nt:unstructured", m.get("jcr:primaryType"));
-		}
-	}
+    @Test
+    public void testMap() {
+        @SuppressWarnings("rawtypes")
+        Iterable<Map> iterable = $(tree.getChild(PAR_PATH)).children().map(Map.class);
+        for (Map<?, ?> m : iterable) {
+            Assert.assertEquals("nt:unstructured", m.get("jcr:primaryType"));
+        }
+    }
 }

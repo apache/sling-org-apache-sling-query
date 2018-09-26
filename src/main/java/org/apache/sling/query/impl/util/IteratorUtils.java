@@ -24,18 +24,18 @@ import java.util.Iterator;
 
 public final class IteratorUtils {
 
-	private IteratorUtils() {
-	}
+    private IteratorUtils() {
+    }
 
-	public static <T> Iterator<T> arrayIterator(T... elements) {
-		return Arrays.asList(elements).iterator();
-	}
+    public static <T> Iterator<T> arrayIterator(T... elements) {
+        return Arrays.asList(elements).iterator();
+    }
 
-	public static <T> Iterator<T> singleElementIterator(T element) {
-		return Arrays.asList(element).iterator();
-	}
+    public static <T> Iterator<T> singleElementIterator(T element) {
+        return Arrays.asList(element).iterator();
+    }
 
-	public static <T> Iterator<T> emptyIterator() {
-		return Arrays.<T> asList().iterator();
-	}
+    public static <T> Iterator<T> emptyIterator() {
+        return Arrays.<T>asList().iterator();
+    }
 }

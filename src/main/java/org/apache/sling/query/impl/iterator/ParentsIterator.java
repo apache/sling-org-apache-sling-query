@@ -25,34 +25,34 @@ import java.util.function.Predicate;
 
 public class ParentsIterator<T> extends AbstractIterator<T> {
 
-	private final Predicate<T> until;
+    private final Predicate<T> until;
 
-	private final TreeProvider<T> provider;
-	
-	private T currentResource;
+    private final TreeProvider<T> provider;
 
-	public ParentsIterator(Predicate<T> until, T currentResource, TreeProvider<T> provider) {
-		this.currentResource = currentResource;
-		this.until = until;
-		this.provider = provider;
-	}
+    private T currentResource;
 
-	@Override
-	protected T getElement() {
-		if (currentResource == null) {
-			return null;
-		}
-		currentResource = provider.getParent(currentResource);
+    public ParentsIterator(Predicate<T> until, T currentResource, TreeProvider<T> provider) {
+        this.currentResource = currentResource;
+        this.until = until;
+        this.provider = provider;
+    }
 
-		if (currentResource == null) {
-			return null;
-		}
+    @Override
+    protected T getElement() {
+        if (currentResource == null) {
+            return null;
+        }
+        currentResource = provider.getParent(currentResource);
 
-		if (until != null && until.test(currentResource)) {
-			return null;
-		}
+        if (currentResource == null) {
+            return null;
+        }
 
-		return currentResource;
-	}
+        if (until != null && until.test(currentResource)) {
+            return null;
+        }
+
+        return currentResource;
+    }
 
 }

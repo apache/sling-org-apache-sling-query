@@ -24,17 +24,17 @@ import java.util.Collections;
 import java.util.List;
 
 public class Selector {
-	private final List<SelectorSegment> segments;
+    private final List<SelectorSegment> segments;
 
-	public Selector() {
-		this.segments = Collections.emptyList();
-	}
+    public Selector() {
+        this.segments = Collections.emptyList();
+    }
 
-	public Selector(List<SelectorSegment> segments) {
-		this.segments = new ArrayList<>(segments);
-	}
+    public Selector(List<SelectorSegment> segments) {
+        this.segments = new ArrayList<>(segments);
+    }
 
-	public List<SelectorSegment> getSegments() {
-		return segments;
-	}
+    public List<SelectorSegment> getSegments() {
+        return segments;
+    }
 }

@@ -29,18 +29,18 @@ import org.junit.Test;
 
 public class FilterTest {
 
-	private Resource tree = TestUtils.getTree();
+    private Resource tree = TestUtils.getTree();
 
-	@Test
-	public void testFilter() {
-		SlingQuery query = $(tree).searchStrategy(SearchStrategy.DFS).find()
-				.filter(resource -> "configParsys".equals(resource.getName()));
-		assertResourceSetEquals(query.iterator(), "configParsys");
-	}
+    @Test
+    public void testFilter() {
+        SlingQuery query = $(tree).searchStrategy(SearchStrategy.DFS).find()
+                .filter(resource -> "configParsys".equals(resource.getName()));
+        assertResourceSetEquals(query.iterator(), "configParsys");
+    }
 
-	@Test
-	public void testFilterOnEmptyCollection() {
-		SlingQuery query = $(tree).children("cq:Undefined").filter(resource -> true);
-		assertEmptyIterator(query.iterator());
-	}
+    @Test
+    public void testFilterOnEmptyCollection() {
+        SlingQuery query = $(tree).children("cq:Undefined").filter(resource -> true);
+        assertEmptyIterator(query.iterator());
+    }
 }

@@ -28,92 +28,92 @@ import org.apache.sling.api.resource.ResourceResolver;
 
 public class PropertyResourceMock implements Resource {
 
-	private final String name;
+    private final String name;
 
-	private final Resource parent;
+    private final Resource parent;
 
-	private final String value;
+    private final String value;
 
-	private final String[] values;
+    private final String[] values;
 
-	public PropertyResourceMock(Resource parent, String name, String value) {
-		this.parent = parent;
-		this.name = name;
-		this.value = value;
-		this.values = null;
-	}
+    public PropertyResourceMock(Resource parent, String name, String value) {
+        this.parent = parent;
+        this.name = name;
+        this.value = value;
+        this.values = null;
+    }
 
-	public PropertyResourceMock(Resource parent, String name, String[] values) {
-		this.parent = parent;
-		this.name = name;
-		this.value = null;
-		this.values = values;
-	}
+    public PropertyResourceMock(Resource parent, String name, String[] values) {
+        this.parent = parent;
+        this.name = name;
+        this.value = null;
+        this.values = values;
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public <AdapterType> AdapterType adaptTo(Class<AdapterType> type) {
-		if (type.isAssignableFrom(String.class)) {
-			return (AdapterType) value;
-		} else if (type.isAssignableFrom(String[].class)) {
-			return (AdapterType) (value == null ? values : new String[] { value });
-		} else {
-			return null;
-		}
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public <AdapterType> AdapterType adaptTo(Class<AdapterType> type) {
+        if (type.isAssignableFrom(String.class)) {
+            return (AdapterType) value;
+        } else if (type.isAssignableFrom(String[].class)) {
+            return (AdapterType) (value == null ? values : new String[] { value });
+        } else {
+            return null;
+        }
+    }
 
-	@Override
-	public String getPath() {
-		if (parent == null) {
-			return "";
-		} else {
-			return String.format("%s/%s", parent.getPath(), name);
-		}
-	}
+    @Override
+    public String getPath() {
+        if (parent == null) {
+            return "";
+        } else {
+            return String.format("%s/%s", parent.getPath(), name);
+        }
+    }
 
-	@Override
-	public String getName() {
-		return name;
-	}
+    @Override
+    public String getName() {
+        return name;
+    }
 
-	@Override
-	public Resource getParent() {
-		return parent;
-	}
+    @Override
+    public Resource getParent() {
+        return parent;
+    }
 
-	@Override
-	public Iterator<Resource> listChildren() {
-		return Arrays.<Resource> asList().iterator();
-	}
+    @Override
+    public Iterator<Resource> listChildren() {
+        return Arrays.<Resource>asList().iterator();
+    }
 
-	@Override
-	public Resource getChild(String relPath) {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public Resource getChild(String relPath) {
+        throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public String getResourceType() {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public String getResourceType() {
+        throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public String getResourceSuperType() {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public String getResourceSuperType() {
+        throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public boolean isResourceType(String resourceType) {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public boolean isResourceType(String resourceType) {
+        throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public ResourceMetadata getResourceMetadata() {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public ResourceMetadata getResourceMetadata() {
+        throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public ResourceResolver getResourceResolver() {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public ResourceResolver getResourceResolver() {
+        throw new UnsupportedOperationException();
+    }
 
 }

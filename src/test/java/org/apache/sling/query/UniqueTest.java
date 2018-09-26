@@ -27,15 +27,15 @@ import org.junit.Test;
 
 public class UniqueTest {
 
-	private Resource tree = TestUtils.getTree();
+    private Resource tree = TestUtils.getTree();
 
-	@Test
-	public void testUnique() {
-		Resource r1 = tree.getChild("home");
-		Resource r2 = tree.getChild("application");
-		Resource r3 = tree.getChild("home/java");
+    @Test
+    public void testUnique() {
+        Resource r1 = tree.getChild("home");
+        Resource r2 = tree.getChild("application");
+        Resource r3 = tree.getChild("home/java");
 
-		SlingQuery query = $(r1, r1, r1, r2, r2, r3, r3, r3, r1).unique();
-		assertResourceListEquals(query.iterator(), "home", "application", "java");
-	}
+        SlingQuery query = $(r1, r1, r1, r2, r2, r3, r3, r3, r1).unique();
+        assertResourceListEquals(query.iterator(), "home", "application", "java");
+    }
 }

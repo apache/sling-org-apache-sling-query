@@ -28,18 +28,18 @@ import org.apache.sling.query.impl.iterator.DescendantsIterator;
 
 public class DescendantFunction<T> implements IteratorToIteratorFunction<T> {
 
-	private final Iterable<T> descendants;
+    private final Iterable<T> descendants;
 
-	private final TreeProvider<T> provider;
+    private final TreeProvider<T> provider;
 
-	public DescendantFunction(Iterable<T> descendants, TreeProvider<T> provider) {
-		this.descendants = descendants;
-		this.provider = provider;
-	}
+    public DescendantFunction(Iterable<T> descendants, TreeProvider<T> provider) {
+        this.descendants = descendants;
+        this.provider = provider;
+    }
 
-	@Override
-	public Iterator<Option<T>> apply(Iterator<Option<T>> input) {
-		return new DescendantsIterator<>(input, descendants.iterator(), provider);
-	}
+    @Override
+    public Iterator<Option<T>> apply(Iterator<Option<T>> input) {
+        return new DescendantsIterator<>(input, descendants.iterator(), provider);
+    }
 
 }

@@ -35,29 +35,29 @@ import org.apache.sling.query.api.internal.Option;
  */
 public class UniqueIterator<T> extends AbstractIterator<Option<T>> {
 
-	private Iterator<Option<T>> iterator;
+    private Iterator<Option<T>> iterator;
 
-	private Set<T> seen;
+    private Set<T> seen;
 
-	public UniqueIterator(Iterator<Option<T>> input) {
-		this.iterator = input;
-		seen = new HashSet<>();
-	}
+    public UniqueIterator(Iterator<Option<T>> input) {
+        this.iterator = input;
+        seen = new HashSet<>();
+    }
 
-	@Override
-	protected Option<T> getElement() {
-		if (!iterator.hasNext()) {
-			iterator = Collections.emptyIterator();
-			seen = null;
-			return null;
-		}
-		Option<T> candidate = iterator.next();
-		if (!candidate.isEmpty()) {
-			if (!seen.add(candidate.getElement())) {
-				return Option.empty(candidate.getArgumentId());
-			}
-		}
-		return candidate;
-	}
+    @Override
+    protected Option<T> getElement() {
+        if (!iterator.hasNext()) {
+            iterator = Collections.emptyIterator();
+            seen = null;
+            return null;
+        }
+        Option<T> candidate = iterator.next();
+        if (!candidate.isEmpty()) {
+            if (!seen.add(candidate.getElement())) {
+                return Option.empty(candidate.getArgumentId());
+            }
+        }
+        return candidate;
+    }
 
 }

@@ -23,18 +23,18 @@ import java.util.function.Predicate;
 
 public class RejectingPredicate<T> implements Predicate<T> {
 
-	private final Predicate<T> predicate;
+    private final Predicate<T> predicate;
 
-	public RejectingPredicate() {
-		this(resource -> true);
-	}
+    public RejectingPredicate() {
+        this(resource -> true);
+    }
 
-	public RejectingPredicate(Predicate<T> predicate) {
-		this.predicate = predicate;
-	}
+    public RejectingPredicate(Predicate<T> predicate) {
+        this.predicate = predicate;
+    }
 
-	@Override
-	public boolean test(T value) {
-		return !predicate.test(value);
-	}
+    @Override
+    public boolean test(T value) {
+        return !predicate.test(value);
+    }
 }

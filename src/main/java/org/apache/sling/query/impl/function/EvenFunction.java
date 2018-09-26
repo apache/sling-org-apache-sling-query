@@ -28,29 +28,29 @@ import org.apache.sling.query.impl.iterator.FilteringIterator;
 
 public class EvenFunction<T> implements IteratorToIteratorFunction<T> {
 
-	private final boolean even;
+    private final boolean even;
 
-	public EvenFunction(boolean even) {
-		this.even = even;
-	}
+    public EvenFunction(boolean even) {
+        this.even = even;
+    }
 
-	@Override
-	public Iterator<Option<T>> apply(Iterator<Option<T>> resources) {
-		return new FilteringIterator<>(resources, new EvenPredicate<>(even));
-	}
+    @Override
+    public Iterator<Option<T>> apply(Iterator<Option<T>> resources) {
+        return new FilteringIterator<>(resources, new EvenPredicate<>(even));
+    }
 
-	private static class EvenPredicate<T> implements Predicate<T> {
-		private boolean accept;
+    private static class EvenPredicate<T> implements Predicate<T> {
+        private boolean accept;
 
-		public EvenPredicate(boolean firstState) {
-			accept = firstState;
-		}
+        public EvenPredicate(boolean firstState) {
+            accept = firstState;
+        }
 
-		@Override
-		public boolean test(T element) {
-			boolean oldAccept = accept;
-			accept = !accept;
-			return oldAccept;
-		}
-	}
+        @Override
+        public boolean test(T element) {
+            boolean oldAccept = accept;
+            accept = !accept;
+            return oldAccept;
+        }
+    }
 }

@@ -29,21 +29,21 @@ import org.apache.sling.query.impl.iterator.SiblingsIterator.Type;
 
 public class PrevFunction<T> implements ElementToIteratorFunction<T> {
 
-	private final Predicate<T> until;
+    private final Predicate<T> until;
 
-	private final TreeProvider<T> provider;
+    private final TreeProvider<T> provider;
 
-	public PrevFunction(TreeProvider<T> provider) {
-		this(null, provider);
-	}
+    public PrevFunction(TreeProvider<T> provider) {
+        this(null, provider);
+    }
 
-	public PrevFunction(Predicate<T> until, TreeProvider<T> provider) {
-		this.until = until;
-		this.provider = provider;
-	}
+    public PrevFunction(Predicate<T> until, TreeProvider<T> provider) {
+        this.until = until;
+        this.provider = provider;
+    }
 
-	@Override
-	public Iterator<T> apply(T resource) {
-		return new SiblingsIterator<>(until, resource, Type.PREV, provider);
-	}
+    @Override
+    public Iterator<T> apply(T resource) {
+        return new SiblingsIterator<>(until, resource, Type.PREV, provider);
+    }
 }

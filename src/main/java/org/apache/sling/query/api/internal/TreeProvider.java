@@ -29,17 +29,17 @@ import org.osgi.annotation.versioning.ConsumerType;
 
 @ConsumerType
 public interface TreeProvider<T> {
-	Iterator<T> listChildren(T parent);
+    Iterator<T> listChildren(T parent);
 
-	T getParent(T element);
+    T getParent(T element);
 
-	String getName(T element);
+    String getName(T element);
 
-	Predicate<T> getPredicate(String type, String name, List<Attribute> attributes);
+    Predicate<T> getPredicate(String type, String name, List<Attribute> attributes);
 
-	Iterator<T> query(List<SelectorSegment> segment, T resource);
+    Iterator<T> query(List<SelectorSegment> segment, T resource);
 
-	boolean sameElement(T o1, T o2);
+    boolean sameElement(T o1, T o2);
 
-	boolean isDescendant(T root, T testedElement);
+    boolean isDescendant(T root, T testedElement);
 }

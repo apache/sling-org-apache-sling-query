@@ -25,15 +25,15 @@ import java.util.function.Predicate;
 
 public class ParentPredicate<T> implements Predicate<T> {
 
-	private final TreeProvider<T> provider;
+    private final TreeProvider<T> provider;
 
-	public ParentPredicate(TreeProvider<T> provider) {
-		this.provider = provider;
-	}
+    public ParentPredicate(TreeProvider<T> provider) {
+        this.provider = provider;
+    }
 
-	@Override
-	public boolean test(T resource) {
-		return provider.listChildren(resource).hasNext();
-	}
+    @Override
+    public boolean test(T resource) {
+        return provider.listChildren(resource).hasNext();
+    }
 
 }

@@ -43,7 +43,7 @@ public class LastTest {
         SlingQuery query = $(tree).children("cq:Undefined").last();
         assertEmptyIterator(query.iterator());
     }
-    
+
     @Test
     public void testLastAfterFilter() {
         SlingQuery query = $(tree.getChild(PAR_PATH)).children().filter("[key=helloWorld]").last();

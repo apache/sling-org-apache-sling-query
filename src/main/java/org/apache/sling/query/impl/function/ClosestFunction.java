@@ -28,24 +28,24 @@ import org.apache.sling.query.impl.util.IteratorUtils;
 
 public class ClosestFunction<T> implements ElementToIteratorFunction<T> {
 
-	private final Predicate<T> predicate;
+    private final Predicate<T> predicate;
 
-	private final TreeProvider<T> provider;
+    private final TreeProvider<T> provider;
 
-	public ClosestFunction(Predicate<T> predicate, TreeProvider<T> provider) {
-		this.predicate = predicate;
-		this.provider = provider;
-	}
+    public ClosestFunction(Predicate<T> predicate, TreeProvider<T> provider) {
+        this.predicate = predicate;
+        this.provider = provider;
+    }
 
-	@Override
-	public Iterator<T> apply(T resource) {
-		T current = resource;
-		while (current != null) {
-			if (predicate.test(current)) {
-				return IteratorUtils.singleElementIterator(current);
-			}
-			current = provider.getParent(current);
-		}
-		return IteratorUtils.emptyIterator();
-	}
+    @Override
+    public Iterator<T> apply(T resource) {
+        T current = resource;
+        while (current != null) {
+            if (predicate.test(current)) {
+                return IteratorUtils.singleElementIterator(current);
+            }
+            current = provider.getParent(current);
+        }
+        return IteratorUtils.emptyIterator();
+    }
 }

@@ -26,14 +26,14 @@ import org.apache.sling.query.api.internal.TreeProvider;
 
 public class ChildrenFunction<T> implements ElementToIteratorFunction<T> {
 
-	private final TreeProvider<T> provider;
+    private final TreeProvider<T> provider;
 
-	public ChildrenFunction(TreeProvider<T> provider) {
-		this.provider = provider;
-	}
+    public ChildrenFunction(TreeProvider<T> provider) {
+        this.provider = provider;
+    }
 
-	@Override
-	public Iterator<T> apply(T parent) {
-		return provider.listChildren(parent);
-	}
+    @Override
+    public Iterator<T> apply(T parent) {
+        return provider.listChildren(parent);
+    }
 }
