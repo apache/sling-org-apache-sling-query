@@ -22,7 +22,8 @@ package org.apache.sling.query.impl.resource.jcr.query;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.query.impl.resource.jcr.JcrOperator;
 import org.apache.sling.query.impl.resource.jcr.JcrTypeResolver;
 import org.apache.sling.query.impl.resource.jcr.query.Formula.Operator;
