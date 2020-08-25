@@ -19,7 +19,8 @@
 
 package org.apache.sling.query.impl.selector.parser;
 
-import org.apache.commons.lang.ArrayUtils;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 public enum State {
     START {

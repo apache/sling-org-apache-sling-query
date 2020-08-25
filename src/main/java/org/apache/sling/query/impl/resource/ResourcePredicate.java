@@ -26,7 +26,7 @@ import java.util.function.Predicate;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.query.impl.resource.jcr.JcrTypeResolver;
 import org.apache.sling.query.impl.selector.parser.Attribute;

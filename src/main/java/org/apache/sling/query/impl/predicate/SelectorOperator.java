@@ -19,9 +19,11 @@
 
 package org.apache.sling.query.impl.predicate;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang.StringUtils;
+
 
 public enum SelectorOperator {
     CONTAINS("*=") {
