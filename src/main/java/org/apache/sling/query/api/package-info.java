@@ -17,7 +17,7 @@
  * under the License.
  */
 
-@Version("4.0.2")
+@Version("4.0.3")
 package org.apache.sling.query.api;
 
 import org.osgi.annotation.versioning.Version;
