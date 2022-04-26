@@ -21,15 +21,15 @@
 
     <parent>
         <groupId>org.apache.sling</groupId>
-        <artifactId>sling</artifactId>
-        <version>32</version>
+        <artifactId>sling-bundle-parent</artifactId>
+        <version>47</version>
         <relativePath />
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>org.apache.sling.query</artifactId>
     <version>4.0.3-SNAPSHOT</version>
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
 
     <name>Apache Sling Query</name>
     <description>jQuery-inspired repository traversal tool for Sling</description>
@@ -43,19 +43,21 @@
 
     <properties>
         <sling.java.version>8</sling.java.version>
+        <project.build.outputTimestamp>2022-04-26T00:00:00Z</project.build.outputTimestamp>
     </properties>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <extensions>true</extensions>
-            </plugin>
-        </plugins>
-    </build>
-
     <dependencies>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.annotation.versioning</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.service.component.annotations</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- commons -->
         <dependency>
             <groupId>commons-lang</groupId>
