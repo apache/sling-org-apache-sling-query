@@ -19,6 +19,8 @@
 
 package org.apache.sling.query.impl.iterator;
 
+import static org.apache.sling.query.TestUtils.l;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -27,11 +29,8 @@ import org.apache.sling.query.api.internal.IteratorToIteratorFunction;
 import org.apache.sling.query.api.internal.Option;
 import org.apache.sling.query.impl.function.IdentityFunction;
 import org.apache.sling.query.impl.function.SliceFunction;
-import org.apache.sling.query.impl.iterator.ReverseIterator;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.apache.sling.query.TestUtils.l;
 
 public class ReverseTest {
 

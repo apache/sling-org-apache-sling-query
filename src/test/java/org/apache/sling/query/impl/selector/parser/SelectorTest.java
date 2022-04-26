@@ -23,10 +23,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.sling.query.impl.selector.parser.Attribute;
-import org.apache.sling.query.impl.selector.parser.Modifier;
-import org.apache.sling.query.impl.selector.parser.SelectorParser;
-import org.apache.sling.query.impl.selector.parser.SelectorSegment;
 import org.junit.Assert;
 import org.junit.Test;
 

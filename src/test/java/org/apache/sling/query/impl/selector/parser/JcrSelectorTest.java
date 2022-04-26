@@ -22,9 +22,6 @@ package org.apache.sling.query.impl.selector.parser;
 import java.util.List;
 
 import org.apache.sling.query.impl.resource.jcr.query.JcrQueryBuilder;
-import org.apache.sling.query.impl.selector.parser.Selector;
-import org.apache.sling.query.impl.selector.parser.SelectorParser;
-import org.apache.sling.query.impl.selector.parser.SelectorSegment;
 import org.apache.sling.query.mock.MockTypeResolver;
 import org.junit.Assert;
 import org.junit.Test;
