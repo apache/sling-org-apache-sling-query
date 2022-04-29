@@ -30,6 +30,8 @@ import org.apache.sling.query.api.internal.Option;
  * non-empty values by the input function. Name is inspired by the
  * <a href="http://en.wikipedia.org/wiki/Support_(mathematics)">support of the
  * function</a>.
+ *
+ * @param <T> Option type
  */
 public class SuppIterator<T> extends AbstractIterator<Option<T>> {
 
@@ -48,8 +50,8 @@ public class SuppIterator<T> extends AbstractIterator<Option<T>> {
 
     /**
      * The idea behind this method is that index of each element in the input
-     * iterator is passed to the function. One or more Option<T> items for each
-     * index will be returned. If any Option<T> item in that index set is not empty
+     * iterator is passed to the function. One or more Option&lt;T&gt; items for each
+     * index will be returned. If any Option&lt;T&gt; item in that index set is not empty
      * then the corresponding element in the input will be returned.
      */
     @Override

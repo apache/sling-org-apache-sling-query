@@ -30,8 +30,8 @@ import org.apache.sling.query.api.internal.Option;
  * Provides an iteration of unique objects. During the iteration process this
  * iterator maintains a {@link HashSet} of previously seen items that will be
  * used as filter to prevent duplicates
- * 
- * @param <T>
+ *
+ * @param <T> Option type
  */
 public class UniqueIterator<T> extends AbstractIterator<Option<T>> {
 

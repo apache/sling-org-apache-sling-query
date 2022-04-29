@@ -24,10 +24,10 @@ import java.util.Iterator;
 import org.apache.sling.query.api.internal.Option;
 
 /**
- * 
- * 
  *
- * @param <T>
+ *
+ *
+ * @param <T> Option type
  */
 public class LastIterator<T> extends AbstractIterator<Option<T>> {
 

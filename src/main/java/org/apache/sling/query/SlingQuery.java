@@ -56,10 +56,10 @@ public class SlingQuery extends AbstractQuery<Resource, SlingQuery> {
 
     /**
      * Transform the whole collection to a new {@link Iterable} object, invoking
-     * {@link Adaptable#adaptTo(Class)} method on each Resource. If some Resource
+     * {@link org.apache.sling.api.adapter.Adaptable#adaptTo(Class)} method on each Resource. If some Resource
      * can't be adapted to the class (eg. {@code adaptTo()} returns {@code null}),
      * it will be skipped.
-     * 
+     *
      * @param clazz
      *            Class used to adapt the Resources
      * @param <E>

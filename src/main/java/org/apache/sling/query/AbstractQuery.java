@@ -100,7 +100,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Include resources to the collection.
-     * 
+     *
      * @param resources
      *            Resources to include
      * @return new SlingQuery object transformed by this operation
@@ -111,7 +111,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Include resources to the collection.
-     * 
+     *
      * @param iterable
      *            Resources to include
      * @return new SlingQuery object transformed by this operation
@@ -122,7 +122,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Transform SlingQuery collection into a lazy list.
-     * 
+     *
      * @return List containing all elements from the collection.
      */
     public List<T> asList() {
@@ -131,7 +131,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Get list of the children for each Resource in the collection.
-     * 
+     *
      * @return new SlingQuery object transformed by this operation
      */
     public Q children() {
@@ -140,7 +140,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Get list of the children for each Resource in the collection.
-     * 
+     *
      * @param filter
      *            Children filter
      * @return new SlingQuery object transformed by this operation
@@ -151,7 +151,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Get list of the children for each Resource in the collection.
-     * 
+     *
      * @param filter
      *            Children filter
      * @return new SlingQuery object transformed by this operation
@@ -162,7 +162,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Get list of the children for each Resource in the collection.
-     * 
+     *
      * @param filter
      *            Children filter
      * @return new SlingQuery object transformed by this operation
@@ -174,7 +174,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * For each Resource in the collection, return the first element matching the
      * selector testing the Resource itself and traversing up its ancestors.
-     * 
+     *
      * @param selector
      *            Ancestor filter
      * @return new SlingQuery object transformed by this operation
@@ -186,7 +186,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * For each Resource in the collection, return the first element matching the
      * selector testing the Resource itself and traversing up its ancestors.
-     * 
+     *
      * @param iterable
      *            Ancestor filter
      * @return new SlingQuery object transformed by this operation
@@ -198,7 +198,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * For each Resource in the collection, return the first element matching the
      * selector testing the Resource itself and traversing up its ancestors.
-     * 
+     *
      * @param predicate
      *            Ancestor filter
      * @return new SlingQuery object transformed by this operation
@@ -209,7 +209,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Reduce Resource collection to the one Resource at the given 0-based index.
-     * 
+     *
      * @param index
      *            0-based index
      * @return new SlingQuery object transformed by this operation
@@ -220,7 +220,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Filter Resource collection using given selector.
-     * 
+     *
      * @param selector
      *            Selector
      * @return new SlingQuery object transformed by this operation
@@ -231,7 +231,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Filter Resource collection using given predicate object.
-     * 
+     *
      * @param predicate
      *            Collection filter
      * @return new SlingQuery object transformed by this operation
@@ -242,7 +242,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Filter Resource collection using given iterable.
-     * 
+     *
      * @param iterable
      *            Collection filter
      * @return new SlingQuery object transformed by this operation
@@ -255,7 +255,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
      * For each Resource in collection use depth-first search to return all its
      * descendants. Please notice that invoking this method on a Resource being a
      * root of a large subtree may and will cause performance problems.
-     * 
+     *
      * @return new SlingQuery object transformed by this operation
      */
     public Q find() {
@@ -266,7 +266,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
      * For each Resource in collection use breadth-first search to return all its
      * descendants. Please notice that invoking this method on a Resource being a
      * root of a large subtree may and will cause performance problems.
-     * 
+     *
      * @param selector
      *            descendants filter
      * @return new SlingQuery object transformed by this operation
@@ -279,7 +279,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
      * For each Resource in collection use breadth-first search to return all its
      * descendants. Please notice that invoking this method on a Resource being a
      * root of a large subtree may and will cause performance problems.
-     * 
+     *
      * @param predicate
      *            descendants filter
      * @return new SlingQuery object transformed by this operation
@@ -292,7 +292,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
      * For each Resource in collection use breadth-first search to return all its
      * descendants. Please notice that invoking this method on a Resource being a
      * root of a large subtree may and will cause performance problems.
-     * 
+     *
      * @param iterable
      *            descendants filter
      * @return new SlingQuery object transformed by this operation
@@ -304,7 +304,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * Filter Resource collection to the first element. Equivalent to {@code eq(0)}
      * or {@code slice(0, 0)}.
-     * 
+     *
      * @return new SlingQuery object transformed by this operation
      */
     public Q first() {
@@ -314,7 +314,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * Pick such Resources from the collection that have descendant matching the
      * selector.
-     * 
+     *
      * @param selector
      *            Descendant selector
      * @return new SlingQuery object transformed by this operation
@@ -326,7 +326,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * Pick such Resources from the collection that have descendant matching the
      * selector.
-     * 
+     *
      * @param predicate
      *            Descendant selector
      * @return new SlingQuery object transformed by this operation
@@ -338,7 +338,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * Pick such Resources from the collection that have descendant matching the
      * selector.
-     * 
+     *
      * @param iterable
      *            Descendant selector
      * @return new SlingQuery object transformed by this operation
@@ -349,7 +349,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Filter Resource collection to the last element.
-     * 
+     *
      * @return new SlingQuery object transformed by this operation
      */
     public Q last() {
@@ -358,7 +358,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Return the next sibling for each Resource in the collection.
-     * 
+     *
      * @return new SlingQuery object transformed by this operation
      */
     public Q next() {
@@ -369,7 +369,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
      * Return the next sibling for each Resource in the collection and filter it by
      * a selector. If the next sibling doesn't match it, empty collection will be
      * returned.
-     * 
+     *
      * @param selector
      *            Next sibling filter
      * @return new SlingQuery object transformed by this operation
@@ -382,7 +382,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
      * Return the next sibling for each Resource in the collection and filter it by
      * a selector. If the next sibling doesn't match it, empty collection will be
      * returned.
-     * 
+     *
      * @param predicate
      *            Next sibling filter
      * @return new SlingQuery object transformed by this operation
@@ -395,7 +395,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
      * Return the next sibling for each Resource in the collection and filter it by
      * a selector. If the next sibling doesn't match it, empty collection will be
      * returned.
-     * 
+     *
      * @param iterable
      *            Next sibling filter
      * @return new SlingQuery object transformed by this operation
@@ -406,7 +406,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Return all following siblings for each Resource in the collection.
-     * 
+     *
      * @return new SlingQuery object transformed by this operation
      */
     public Q nextAll() {
@@ -416,7 +416,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * Return all following siblings for each Resource in the collection, filtering
      * them by a selector.
-     * 
+     *
      * @param selector
      *            Following siblings filter
      * @return new SlingQuery object transformed by this operation
@@ -428,7 +428,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * Return all following siblings for each Resource in the collection, filtering
      * them by a selector.
-     * 
+     *
      * @param predicate
      *            Following siblings filter
      * @return new SlingQuery object transformed by this operation
@@ -440,7 +440,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * Return all following siblings for each Resource in the collection, filtering
      * them by a selector.
-     * 
+     *
      * @param iterable
      *            Following siblings filter
      * @return new SlingQuery object transformed by this operation
@@ -452,7 +452,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * Return all following siblings for each Resource in the collection up to, but
      * not including, Resource matched by a selector.
-     * 
+     *
      * @param until
      *            Selector marking when the operation should stop
      * @return new SlingQuery object transformed by this operation
@@ -464,7 +464,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * Return all following siblings for each Resource in the collection up to, but
      * not including, Resource matched by a selector.
-     * 
+     *
      * @param predicate
      *            Selector marking when the operation should stop
      * @return new SlingQuery object transformed by this operation
@@ -476,7 +476,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * Return all following siblings for each Resource in the collection up to, but
      * not including, Resource matched by a selector.
-     * 
+     *
      * @param iterable
      *            Selector marking when the operation should stop
      * @return new SlingQuery object transformed by this operation
@@ -487,7 +487,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Remove elements from the collection.
-     * 
+     *
      * @param selector
      *            Selector used to remove Resources
      * @return new SlingQuery object transformed by this operation
@@ -498,7 +498,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Remove elements from the collection.
-     * 
+     *
      * @param predicate
      *            Selector used to remove Resources
      * @return new SlingQuery object transformed by this operation
@@ -509,7 +509,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Remove elements from the collection.
-     * 
+     *
      * @param iterable
      *            Selector used to remove Resources
      * @return new SlingQuery object transformed by this operation
@@ -520,7 +520,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Replace each element in the collection with its parent.
-     * 
+     *
      * @return new SlingQuery object transformed by this operation
      */
     public Q parent() {
@@ -529,7 +529,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * For each element in the collection find its all ancestor.
-     * 
+     *
      * @return new SlingQuery object transformed by this operation
      */
     public Q parents() {
@@ -539,7 +539,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * For each element in the collection find its all ancestor, filtered by a
      * selector.
-     * 
+     *
      * @param selector
      *            Parents filter
      * @return new SlingQuery object transformed by this operation
@@ -551,7 +551,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * For each element in the collection find its all ancestor, filtered by a
      * selector.
-     * 
+     *
      * @param predicate
      *            Parents filter
      * @return new SlingQuery object transformed by this operation
@@ -563,7 +563,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * For each element in the collection find its all ancestor, filtered by a
      * selector.
-     * 
+     *
      * @param iterable
      *            Parents filter
      * @return new SlingQuery object transformed by this operation
@@ -575,7 +575,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * For each element in the collection find all of its ancestors until the
      * predicate is met.
-     * 
+     *
      * @param until
      *            Selector marking when the operation should stop
      * @return new SlingQuery object transformed by this operation
@@ -587,7 +587,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * For each element in the collection find all of its ancestors until the
      * predicate is met.
-     * 
+     *
      * @param predicate
      *            Selector marking when the operation should stop
      * @return new SlingQuery object transformed by this operation
@@ -599,7 +599,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * For each element in the collection find all of its ancestors until the
      * predicate is met.
-     * 
+     *
      * @param iterable
      *            Selector marking when the operation should stop
      * @return new SlingQuery object transformed by this operation
@@ -610,7 +610,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Return the previous sibling for each Resource in the collection.
-     * 
+     *
      * @return new SlingQuery object transformed by this operation
      */
     public Q prev() {
@@ -621,7 +621,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
      * Return the previous sibling for each Resource in the collection and filter it
      * by a selector. If the previous sibling doesn't match it, empty collection
      * will be returned.
-     * 
+     *
      * @param selector
      *            Previous sibling filter
      * @return new SlingQuery object transformed by this operation
@@ -634,7 +634,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
      * Return the previous sibling for each Resource in the collection and filter it
      * by a selector. If the previous sibling doesn't match it, empty collection
      * will be returned.
-     * 
+     *
      * @param predicate
      *            Previous sibling filter
      * @return new SlingQuery object transformed by this operation
@@ -647,7 +647,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
      * Return the previous sibling for each Resource in the collection and filter it
      * by a selector. If the previous sibling doesn't match it, empty collection
      * will be returned.
-     * 
+     *
      * @param iterable
      *            Previous sibling filter
      * @return new SlingQuery object transformed by this operation
@@ -658,7 +658,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Return all previous siblings for each Resource in the collection.
-     * 
+     *
      * @return new SlingQuery object transformed by this operation
      */
     public Q prevAll() {
@@ -668,7 +668,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * Return all previous siblings for each Resource in the collection, filtering
      * them by a selector.
-     * 
+     *
      * @param selector
      *            Previous siblings filter
      * @return new SlingQuery object transformed by this operation
@@ -680,7 +680,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * Return all previous siblings for each Resource in the collection, filtering
      * them by a selector.
-     * 
+     *
      * @param predicate
      *            Previous siblings filter
      * @return new SlingQuery object transformed by this operation
@@ -692,7 +692,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * Return all previous siblings for each Resource in the collection, filtering
      * them by a selector.
-     * 
+     *
      * @param iterable
      *            Previous siblings filter
      * @return new SlingQuery object transformed by this operation
@@ -704,7 +704,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * Return all previous siblings for each Resource in the collection up to, but
      * not including, Resource matched by a selector.
-     * 
+     *
      * @param until
      *            Selector marking when the operation should stop
      * @return new SlingQuery object transformed by this operation
@@ -716,7 +716,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * Return all previous siblings for each Resource in the collection up to, but
      * not including, Resource matched by a selector.
-     * 
+     *
      * @param predicate
      *            Selector marking when the operation should stop
      * @return new SlingQuery object transformed by this operation
@@ -728,7 +728,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * Return all previous siblings for each Resource in the collection up to, but
      * not including, Resource matched by a selector.
-     * 
+     *
      * @param iterable
      *            Selector marking when the operation should stop
      * @return new SlingQuery object transformed by this operation
@@ -740,7 +740,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * Set new search strategy, which will be used in {@link AbstractQuery#find()}
      * and {@link AbstractQuery#has(String)} functions.
-     * 
+     *
      * @param strategy
      *            Search strategy type
      * @return new SlingQuery object transformed by this operation
@@ -751,7 +751,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Return siblings for the given Ts.
-     * 
+     *
      * @return new SlingQuery object transformed by this operation
      */
     public Q siblings() {
@@ -760,7 +760,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Return siblings for the given Resources filtered by a selector.
-     * 
+     *
      * @param selector
      *            Siblings filter
      * @return new SlingQuery object transformed by this operation
@@ -771,7 +771,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Return siblings for the given Resources filtered by a selector.
-     * 
+     *
      * @param predicate
      *            Siblings filter
      * @return new SlingQuery object transformed by this operation
@@ -782,7 +782,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Return siblings for the given Resources filtered by a selector.
-     * 
+     *
      * @param iterable
      *            Siblings filter
      * @return new SlingQuery object transformed by this operation
@@ -793,7 +793,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Filter out first {@code from} Resources from the collection.
-     * 
+     *
      * @param from
      *            How many Resources to cut out
      * @return new SlingQuery object transformed by this operation
@@ -808,7 +808,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
     /**
      * Reduce the collection to a subcollection specified by a given range. Both
      * from and to are inclusive, 0-based indices.
-     * 
+     *
      * @param from
      *            Low endpoint (inclusive) of the subcollection
      * @param to
@@ -827,7 +827,7 @@ public abstract class AbstractQuery<T, Q extends AbstractQuery<T, Q>> implements
 
     /**
      * Filter out repeated resources. The implementation of this method uses a
-     * {@link HashSet} to store the processed elements, which may result in an
+     * {@link java.util.HashSet} to store the processed elements, which may result in an
      * increased memory usage for the big collections.
      *
      * @return new SlingQuery object transformed by this operation
